@@ -18,7 +18,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.LinkedList;
 
-public class MesasActivity extends AppCompatActivity {
+public class MesasActivity extends AppCompatActivity implements MesasListFragment.MesasListListener {
 
     private static final String restauranteURL = "http://www.mocky.io/v2/57062d3b1000003903a3f8cf";
 
@@ -139,5 +139,11 @@ public class MesasActivity extends AppCompatActivity {
             ex.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void onMesaSelected(Mesa mesa, int position) {
+        //aqui me entero de que una ciudad ha sido seleccionada en el MesasLisFragment
+        
     }
 }
