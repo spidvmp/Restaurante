@@ -10,17 +10,14 @@ public class Plato {
     private String mNombre;
     private float mPrecio;
     private String mFoto;
-    private String mComentario;
-    private String mVariantes;
     private LinkedList<String> mAlergias;
 
-    public Plato(String nombre, float precio, String foto, String comentario) {
+    public Plato(String nombre, float precio, String foto) {
         this.mNombre = nombre;
         this.mPrecio = precio;
         this.mFoto = foto;
-        this.mComentario = comentario;
+        //this.mComentario = comentario;
         //Las variantes se modificaran en el pedio, asi que se inicializa en blanco
-        this.mVariantes = "";
         this.mAlergias = new LinkedList<String>();
     }
 
@@ -41,16 +38,9 @@ public class Plato {
         return mFoto;
     }
 
-    public String getmVariantes() {
-        return mVariantes;
-    }
-
     public LinkedList<String> getmAlergias() {
         return mAlergias;
     }
 
-    public void variantes(String variantes) {
-        mVariantes = variantes;
-    }
 }
 

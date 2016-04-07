@@ -14,16 +14,24 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.LinkedList;
 
 public class MesasActivity extends AppCompatActivity {
 
     private static final String restauranteURL = "http://www.mocky.io/v2/57062d3b1000003903a3f8cf";
-    public Mesa mMesas;
+
+    //Array de mesas
+    public static LinkedList<Mesa> mMesas;
+    public static LinkedList<Plato> mCarta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mesas);
+
+        //genero por ejemplo 15 posibles mesas de mi restaurante
+        init_modelos();
+
 
         //downloadInfo();
 
@@ -32,7 +40,24 @@ public class MesasActivity extends AppCompatActivity {
 
     }
 
+    private void init_modelos(){
+        mMesas = new LinkedList<Mesa>();
+        mCarta = new LinkedList<Plato>();
 
+        //inicializo los modelos
+        for (int i=0; i<=14 ; i++){
+            mMesas.add(new Mesa(i+1));
+        }
+
+        Plato p = new Plato("patata",8.9f,"p");
+        Plato o = new Plato("carne",25.7f,"c");
+        Plato i = new Plato("lechuga",3.4f,"l");
+
+        mCarta.add(p);
+        mCarta.add(o);
+        mCarta.add(i);
+
+    }
     private static void downloadInfo() throws MalformedURLException {
 
         URL url = null;
@@ -92,7 +117,7 @@ public class MesasActivity extends AppCompatActivity {
             comentario = jsonplato.getString("comment");
 
             //creo el plato
-            Plato p = new Plato(nombre,precio,foto,comentario);
+            Plato p = new Plato(nombre,precio,foto);
             //para las alergias, he de sacar un objeto que es un array
             JSONArray jsonAlergias = jsonplato.getJSONArray("allergies");
             for (int indexA = 0; indexA < jsonAlergias.length(); indexA++) {
