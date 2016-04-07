@@ -18,6 +18,7 @@ public class Mesa {
         this.mLaMesaEstaVacia = true;
     }
 
+
     public void addPlato(Plato plato){
         //se añade un plato a la lista pedida en la mesa
         mPlatos.add(plato);

@@ -1,5 +1,7 @@
 package com.nicatec.restaurante.activity;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -29,14 +31,15 @@ public class MesasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mesas);
 
-        //genero por ejemplo 15 posibles mesas de mi restaurante
+        //inicializo los modelos
         init_modelos();
 
-
-        //downloadInfo();
-
-
-        //me genero 15 mesas vacias
+        /*
+        FragmentManager fm = getFragmentManager();
+        if ( fm.findFragmentById(R.id.fragment_mesas_table) == null){
+            fm.beginTransaction().add(R.id.fragment_mesas_table, new MesasTableFragment()).commit();
+        }
+    */
 
     }
 
@@ -44,18 +47,19 @@ public class MesasActivity extends AppCompatActivity {
         mMesas = new LinkedList<Mesa>();
         mCarta = new LinkedList<Plato>();
 
-        //inicializo los modelos
+
+        //genero por ejemplo 15 posibles mesas de mi restaurante
         for (int i=0; i<=14 ; i++){
             mMesas.add(new Mesa(i+1));
         }
 
-        Plato p = new Plato("patata",8.9f,"p");
-        Plato o = new Plato("carne",25.7f,"c");
-        Plato i = new Plato("lechuga",3.4f,"l");
 
-        mCarta.add(p);
-        mCarta.add(o);
-        mCarta.add(i);
+        mCarta.add(new Plato("patata",8.9f,"p"));
+        mCarta.add(new Plato("carne",25.7f,"c"));
+        mCarta.add(new Plato("lechuga",3.4f,"l"));
+        mCarta.add(new Plato("Tomates",5.4f,"lco"));
+        mCarta.add(new Plato("Brocoli",43.44f,"l"));
+        mCarta.add(new Plato("Coliflor",5.4f,"l"));
 
     }
     private static void downloadInfo() throws MalformedURLException {
