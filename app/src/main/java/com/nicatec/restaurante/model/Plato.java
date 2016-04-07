@@ -12,7 +12,7 @@ public class Plato {
     private String mFoto;
     private String mComentario;
     private String mVariantes;
-    private LinkedList<Alergias> mAlergias;
+    private LinkedList<String> mAlergias;
 
     public Plato(String nombre, float precio, String foto, String comentario) {
         this.mNombre = nombre;
@@ -21,7 +21,12 @@ public class Plato {
         this.mComentario = comentario;
         //Las variantes se modificaran en el pedio, asi que se inicializa en blanco
         this.mVariantes = "";
-        this.mAlergias = new LinkedList<Alergias>();
+        this.mAlergias = new LinkedList<String>();
+    }
+
+    public void addAlergia(String alergia){
+        //me pasan una alergia y la añado al array de alergias
+        this.mAlergias.add(alergia);
     }
 
     public String getmNombre() {
@@ -40,7 +45,7 @@ public class Plato {
         return mVariantes;
     }
 
-    public LinkedList<Alergias> getmAlergias() {
+    public LinkedList<String> getmAlergias() {
         return mAlergias;
     }
 
