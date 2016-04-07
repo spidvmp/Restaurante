@@ -1,11 +1,11 @@
 package com.nicatec.restaurante.activity;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.nicatec.restaurante.R;
+import com.nicatec.restaurante.fragment.MesasListFragment;
 import com.nicatec.restaurante.model.Mesa;
 import com.nicatec.restaurante.model.Plato;
 
@@ -34,12 +34,12 @@ public class MesasActivity extends AppCompatActivity {
         //inicializo los modelos
         init_modelos();
 
-        /*
+
         FragmentManager fm = getFragmentManager();
-        if ( fm.findFragmentById(R.id.fragment_mesas_table) == null){
-            fm.beginTransaction().add(R.id.fragment_mesas_table, new MesasTableFragment()).commit();
+        if ( fm.findFragmentById(R.id.fragment_mesas_list) == null){
+            fm.beginTransaction().add(R.id.fragment_mesas_list, new MesasListFragment()).commit();
         }
-    */
+
 
     }
 

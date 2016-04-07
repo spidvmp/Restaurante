@@ -56,4 +56,9 @@ public class Mesa {
         mLaMesaEstaVacia = true;
         mPlatos.clear();
     }
+
+    @Override
+    public String toString() {
+        return String.format("Mesa %d", mNumero);
+    }
 }
