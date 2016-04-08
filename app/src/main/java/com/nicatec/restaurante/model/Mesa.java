@@ -8,6 +8,7 @@ import java.util.LinkedList;
  */
 public class Mesa {
 
+
     private Integer mNumero;
     private LinkedList<Plato> mPlatos;
     private Boolean mLaMesaEstaVacia;
@@ -60,5 +61,29 @@ public class Mesa {
     @Override
     public String toString() {
         return String.format("Mesa %d", mNumero);
+    }
+
+    public Boolean getmLaMesaEstaVacia() {
+        return mLaMesaEstaVacia;
+    }
+
+    public void setmLaMesaEstaVacia(Boolean mLaMesaEstaVacia) {
+        this.mLaMesaEstaVacia = mLaMesaEstaVacia;
+    }
+
+    public Integer getmNumero() {
+        return mNumero;
+    }
+
+    public void setmNumero(Integer mNumero) {
+        this.mNumero = mNumero;
+    }
+
+    public LinkedList<Plato> getmPlatos() {
+        return mPlatos;
+    }
+
+    public void setmPlatos(LinkedList<Plato> mPlatos) {
+        this.mPlatos = mPlatos;
     }
 }

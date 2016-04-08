@@ -23,20 +23,27 @@ import java.util.LinkedList;
  */
 public class MesasListFragment extends Fragment {
 
+
     //guardo una referencia a mi listener
     private MesasListListener mMesasListListener;
+    //me pasan el array de mesas como parametro
+    private LinkedList<Mesa> mMesasFragment;
 
 
     public MesasListFragment() {
         // Required empty public constructor
     }
 
+    public static MesasListFragment newInstance(Mesa m) {
+        Bundle arguments = new Bundle();
+
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-          LinkedList<Mesa> mesas = new LinkedList<Mesa>();
 
         // Inflate the layout for this fragment
         View root =  inflater.inflate(R.layout.fragment_mesas_list, container, false);
@@ -47,11 +54,11 @@ public class MesasListFragment extends Fragment {
         //modelo para dar valores a la lista
 
         for (int i=0; i<=14 ; i++){
-            mesas.add(new Mesa(i+1));
+            mMesasFragment.add(new Mesa(i+1));
         }
 
         //creamos un adaptador para darselo a al lista y que sepa que datos mostrar
-        ArrayAdapter<Mesa> adapter = new ArrayAdapter<Mesa>(getActivity(), android.R.layout.simple_list_item_1, mMesas);
+        ArrayAdapter<Mesa> adapter = new ArrayAdapter<Mesa>(getActivity(), android.R.layout.simple_list_item_1, mMesasFragment);
 
         //le asignamos el adaptador a la vista
         list.setAdapter(adapter);
@@ -65,7 +72,7 @@ public class MesasListFragment extends Fragment {
                 if ( mMesasListListener != null ){
                     //aviso al listener
                     //obtengo la mesa pulsada
-                    Mesa mesaSelected = mesas.get(position);
+                    Mesa mesaSelected = mMesasFragment.get(position);
                     mMesasListListener.onMesaSelected(mesaSelected,position);
 
 

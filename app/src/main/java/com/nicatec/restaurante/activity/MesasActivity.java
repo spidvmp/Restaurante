@@ -83,57 +83,35 @@ public class MesasActivity extends AppCompatActivity implements MesasListFragmen
             while ( (downloadedBytes = input.read()) != -1) {
                sb.append(new String(data,0, downloadedBytes));
             }
-            //analizamos los datos de JSON a clase
 
+            //lo que recibo es un array de platos
+            JSONArray platosJSONArray = new JSONArray(sb.toString());
+            //me recorro el array
+            for (int index = 0; index <= platosJSONArray.length(); index++){
+                //creo las variables que hacen falta
+                String nombre = null;
+                String foto = null;
+                float precio = 0.0f;
+                String comentario = null;
 
+                //creo el objeto JSON de plato
+                JSONObject jsonplato = platosJSONArray.getJSONObject(index);
+                //relleno los datos
+                nombre = jsonplato.getString("name");
+                foto = jsonplato.getString("photo");
+                precio = (float) jsonplato.getDouble("pvp");
+                comentario = jsonplato.getString("comment");
 
+                //creo el plato
+                Plato p = new Plato(nombre,precio,foto);
+                //para las alergias, he de sacar un objeto que es un array
+                JSONArray jsonAlergias = jsonplato.getJSONArray("allergies");
+                for (int indexA = 0; indexA < jsonAlergias.length(); indexA++) {
+                    //añado la alergia al plato
+                    p.addAlergia(jsonAlergias.getJSONObject(indexA).getString("a"));
+                }
 
-
-
-        /*
-        URLConnection conn = new URL(restauranteURL).openConnection();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        StringBuilder response = new StringBuilder();
-        String line = null;
-
-        while ((line = reader.readLine()) != null ){
-            response.append(line);
-        }
-        reader.close();
-        */
-
-        //lo que recibo es un array de platos
-        JSONArray platosJSONArray = new JSONArray(sb.toString());
-        //me recorro el array
-        for (int index = 0; index <= platosJSONArray.length(); index++){
-            //creo las variables que hacen falta
-            String nombre = null;
-            String foto = null;
-            float precio = 0.0f;
-            String comentario = null;
-
-            //creo el objeto JSON de plato
-            JSONObject jsonplato = platosJSONArray.getJSONObject(index);
-            //relleno los datos
-            nombre = jsonplato.getString("name");
-            foto = jsonplato.getString("photo");
-            precio = (float) jsonplato.getDouble("pvp");
-            comentario = jsonplato.getString("comment");
-
-            //creo el plato
-            Plato p = new Plato(nombre,precio,foto);
-            //para las alergias, he de sacar un objeto que es un array
-            JSONArray jsonAlergias = jsonplato.getJSONArray("allergies");
-            for (int indexA = 0; indexA < jsonAlergias.length(); indexA++) {
-                //ayado la alergia al plato
-                p.addAlergia(jsonAlergias.getJSONObject(indexA).getString("a"));
             }
-
-        }
-
-
-
-
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -144,6 +122,6 @@ public class MesasActivity extends AppCompatActivity implements MesasListFragmen
     @Override
     public void onMesaSelected(Mesa mesa, int position) {
         //aqui me entero de que una ciudad ha sido seleccionada en el MesasLisFragment
-        
+
     }
 }
