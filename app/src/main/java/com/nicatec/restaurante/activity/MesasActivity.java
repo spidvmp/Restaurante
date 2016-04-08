@@ -32,7 +32,7 @@ public class MesasActivity extends AppCompatActivity implements MesasListFragmen
         setContentView(R.layout.activity_mesas);
 
         //inicializo los modelos
-        init_modelos();
+        //init_modelos();
 
 
         FragmentManager fm = getFragmentManager();

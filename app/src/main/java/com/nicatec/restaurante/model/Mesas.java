@@ -35,4 +35,8 @@ public class Mesas {
     public int getMesasConut(){
         return mMesas.size();
     }
+
+    public LinkedList<Mesa> getMesas(){
+        return mMesas;
+    }
 }

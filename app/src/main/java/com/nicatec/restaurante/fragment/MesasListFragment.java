@@ -14,9 +14,7 @@ import android.widget.ListView;
 
 import com.nicatec.restaurante.R;
 import com.nicatec.restaurante.model.Mesa;
-
-import java.lang.reflect.Array;
-import java.util.LinkedList;
+import com.nicatec.restaurante.model.Mesas;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,23 +24,20 @@ public class MesasListFragment extends Fragment {
 
     //guardo una referencia a mi listener
     private MesasListListener mMesasListListener;
-    //me pasan el array de mesas como parametro
-    private LinkedList<Mesa> mMesasFragment;
+
 
 
     public MesasListFragment() {
         // Required empty public constructor
     }
 
-    public static MesasListFragment newInstance(Mesa m) {
-        Bundle arguments = new Bundle();
-
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        // /modelo para dar valores a la lista
+        final Mesas mesas = Mesas.getInstance();
 
 
         // Inflate the layout for this fragment
@@ -51,16 +46,13 @@ public class MesasListFragment extends Fragment {
         //accedo a las mesas, ya tengo acceso al array
         ListView list = (ListView) root.findViewById(android.R.id.list);
 
-        //modelo para dar valores a la lista
 
-        for (int i=0; i<=14 ; i++){
-            mMesasFragment.add(new Mesa(i+1));
-        }
 
         //creamos un adaptador para darselo a al lista y que sepa que datos mostrar
-        ArrayAdapter<Mesa> adapter = new ArrayAdapter<Mesa>(getActivity(), android.R.layout.simple_list_item_1, mMesasFragment);
 
-        //le asignamos el adaptador a la vista
+        ArrayAdapter<Mesa> adapter = new ArrayAdapter<Mesa>(getActivity(), android.R.layout.simple_list_item_1,mesas.getMesas());
+
+        //le asignamos el adaptador a la vista;
         list.setAdapter(adapter);
 
         //para enterarnos de que pulsan sobre una celda, hay que ...
@@ -72,7 +64,7 @@ public class MesasListFragment extends Fragment {
                 if ( mMesasListListener != null ){
                     //aviso al listener
                     //obtengo la mesa pulsada
-                    Mesa mesaSelected = mMesasFragment.get(position);
+                    Mesa mesaSelected = mesas.getMesa(position);
                     mMesasListListener.onMesaSelected(mesaSelected,position);
 
 
