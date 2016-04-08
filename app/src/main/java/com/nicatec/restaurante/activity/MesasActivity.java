@@ -23,7 +23,7 @@ public class MesasActivity extends AppCompatActivity implements MesasListFragmen
     private static final String restauranteURL = "http://www.mocky.io/v2/57062d3b1000003903a3f8cf";
 
     //Array de mesas
-    public static LinkedList<Mesa> mMesas;
+    //public static LinkedList<Mesa> mMesas;
     public static LinkedList<Plato> mCarta;
 
     @Override
@@ -42,12 +42,12 @@ public class MesasActivity extends AppCompatActivity implements MesasListFragmen
 
 
     }
-
+/*
     private void init_modelos(){
-        mMesas = new LinkedList<Mesa>();
+        //mMesas = new LinkedList<Mesa>();
         mCarta = new LinkedList<Plato>();
 
-
+/*
         //genero por ejemplo 15 posibles mesas de mi restaurante
         for (int i=0; i<=14 ; i++){
             mMesas.add(new Mesa(i+1));
@@ -61,7 +61,9 @@ public class MesasActivity extends AppCompatActivity implements MesasListFragmen
         mCarta.add(new Plato("Brocoli",43.44f,"l"));
         mCarta.add(new Plato("Coliflor",5.4f,"l"));
 
+
     }
+   */
     private static void downloadInfo() throws MalformedURLException {
 
         URL url = null;
