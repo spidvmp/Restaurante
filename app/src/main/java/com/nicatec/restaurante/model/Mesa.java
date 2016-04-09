@@ -75,13 +75,13 @@ public class Mesa {
         return mNumero;
     }
 
-    public void setmNumero(Integer mNumero) {
-        this.mNumero = mNumero;
+    public void setmNumero(Integer numero) {
+        this.mNumero = numero;
     }
 
-    public String getNombre() { return  "Mesa " + this.mNumero; }
+    //public String getNombre() { return  "Mesa " + this.mNumero; }
 
-    public LinkedList<Plato> getmPlatos() {
+    public LinkedList<Plato> getPlatos() {
         return mPlatos;
     }
 

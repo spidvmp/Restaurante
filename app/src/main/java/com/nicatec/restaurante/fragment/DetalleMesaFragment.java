@@ -7,11 +7,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.nicatec.restaurante.R;
+import com.nicatec.restaurante.model.Carta;
 import com.nicatec.restaurante.model.Mesa;
 import com.nicatec.restaurante.model.Mesas;
+import com.nicatec.restaurante.model.Plato;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,6 +50,9 @@ public class DetalleMesaFragment extends Fragment {
         if ( getArguments() != null )
             mMesa = Mesas.getInstance().getMesa(getArguments().getInt(ARG_MESA_INDEX));
         Log.v("DetalleMesaFrgamnent", "Mesa " + mMesa.getmNumero());
+
+        mMesa.addPlato(Carta.getsInstance().getPlato(1));
+        mMesa.addPlato(Carta.getsInstance().getPlato(0));
     }
 
     @Override
@@ -55,7 +63,34 @@ public class DetalleMesaFragment extends Fragment {
 
         //saco las referencias de los elementos de la vista
         mNombreMesa = (TextView) root.findViewById(R.id.nombre_mesa);
+        //tabla de platos pedidos
+        ListView list = (ListView) root.findViewById(R.id.list);
 
+        //creamos un adaptador para darselo a la lista y que sepa que datos mostrar
+        //le tengo que meter el array que esta dentro de la mesa pedida
+        ArrayAdapter<Plato> adapter = new ArrayAdapter<Plato>(getActivity(), android.R.layout.simple_list_item_1,mMesa.getPlatos());
+
+        //le asignamos el adaptador a la vista;
+        list.setAdapter(adapter);
+
+        /*
+        //para enterarnos de que pulsan sobre una celda, hay que ...
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //le digo a mi actividad que han pulsado una celda
+                //compruebo que estoy enganchado a la actividad ( con el onAttach )
+                if ( mMesasListListener != null ){
+                    //aviso al listener
+                    //obtengo la mesa pulsada
+                    Mesa mesaSelected = mesas.getMesa(position);
+                    mMesasListListener.onMesaSelected(mesaSelected,position);
+
+
+                }
+            }
+        });
+    */
         updateView();
         return root;
     }
@@ -63,7 +98,7 @@ public class DetalleMesaFragment extends Fragment {
 
     private void updateView(){
 
-        mNombreMesa.setText(mMesa.getNombre());
+        mNombreMesa.setText(mMesa.toString());
     }
 
 }

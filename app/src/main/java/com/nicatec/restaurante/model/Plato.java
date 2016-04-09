@@ -37,6 +37,7 @@ public class Plato {
     public String getmFoto() {
         return mFoto;
     }
+    public String toString() { return mNombre; }
 
     public LinkedList<String> getmAlergias() {
         return mAlergias;
