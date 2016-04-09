@@ -42,7 +42,7 @@ public class DetalleMesaActivity extends AppCompatActivity {
             //extraigo el parametro que me han pasado, se lo paso al fragment para que saque la mesa que tiene que mostrar
             int index = getIntent().getIntExtra(EXTRA_MESA_INDEX, 0);
             fm.beginTransaction()
-                    .add(R.id.fragment_detalle_mesa, new DetalleMesaFragment())
+                    .add(R.id.fragment_detalle_mesa, DetalleMesaFragment.newInstance(index))
                     .commit();
         }
     }

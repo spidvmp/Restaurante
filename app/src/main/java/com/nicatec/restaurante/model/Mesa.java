@@ -79,6 +79,8 @@ public class Mesa {
         this.mNumero = mNumero;
     }
 
+    public String getNombre() { return  "Mesa " + this.mNumero; }
+
     public LinkedList<Plato> getmPlatos() {
         return mPlatos;
     }
