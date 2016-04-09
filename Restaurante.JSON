@@ -1,0 +1,23 @@
+[
+{
+"name":"Al Mondigas",
+"pvp":"12.95",
+"allergies":[{"a":"huevo"}],
+"photo":"albondigas.jpg",
+"comment":"Un plato redondito redondito para comer o jugar a las canicas"
+},
+{
+"name":"Flan",
+"pvp":"5.95",
+"allergies":[{"a":"huevo"}],
+"photo":"flan.jpg",
+"comment":"Un postre delicioso"
+},
+{
+"name":"Mac Arrones",
+"pvp":"7.50",
+"allergies":[{"a":"chorizo"},{"a":"gluten"}],
+"photo":"macarrones.jpg",
+"comment":"Comete un buen plato de estos, con o sin politicos"
+}
+]

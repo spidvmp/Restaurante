@@ -39,16 +39,13 @@ public class MesasListFragment extends Fragment {
         // /modelo para dar valores a la lista
         final Mesas mesas = Mesas.getInstance();
 
-
         // Inflate the layout for this fragment
         View root =  inflater.inflate(R.layout.fragment_mesas_list, container, false);
 
         //accedo a las mesas, ya tengo acceso al array
         ListView list = (ListView) root.findViewById(android.R.id.list);
 
-
-
-        //creamos un adaptador para darselo a al lista y que sepa que datos mostrar
+        //creamos un adaptador para darselo a la lista y que sepa que datos mostrar
 
         ArrayAdapter<Mesa> adapter = new ArrayAdapter<Mesa>(getActivity(), android.R.layout.simple_list_item_1,mesas.getMesas());
 
