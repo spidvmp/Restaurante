@@ -25,8 +25,6 @@ public class DetalleMesaFragment extends Fragment {
     private static final String ARG_MESA_INDEX = "ARG_MESA_INDEX";
     private static Mesa mMesa;
 
-    //saco los elementos de la vista
-    private TextView mNombreMesa;
 
     public static DetalleMesaFragment newInstance(int position) {
         //esto devuelve un DEtallemesafragment y ha recibido un paramtro
@@ -51,8 +49,6 @@ public class DetalleMesaFragment extends Fragment {
             mMesa = Mesas.getInstance().getMesa(getArguments().getInt(ARG_MESA_INDEX));
         Log.v("DetalleMesaFrgamnent", "Mesa " + mMesa.getmNumero());
 
-        mMesa.addPlato(Carta.getsInstance().getPlato(1));
-        mMesa.addPlato(Carta.getsInstance().getPlato(0));
     }
 
     @Override
@@ -62,7 +58,8 @@ public class DetalleMesaFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_detalle_mesa, container, false);
 
         //saco las referencias de los elementos de la vista
-        mNombreMesa = (TextView) root.findViewById(R.id.nombre_mesa);
+        TextView nombre = (TextView) root.findViewById(R.id.nombre_mesa);
+        nombre.setText(mMesa.toString());
         //tabla de platos pedidos
         ListView list = (ListView) root.findViewById(R.id.list);
 
@@ -91,14 +88,9 @@ public class DetalleMesaFragment extends Fragment {
             }
         });
     */
-        updateView();
+
         return root;
     }
 
-
-    private void updateView(){
-
-        mNombreMesa.setText(mMesa.toString());
-    }
 
 }

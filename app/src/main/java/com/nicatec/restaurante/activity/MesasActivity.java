@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.nicatec.restaurante.R;
-import com.nicatec.restaurante.fragment.DetalleMesaFragment;
 import com.nicatec.restaurante.fragment.MesasListFragment;
 import com.nicatec.restaurante.model.Carta;
 import com.nicatec.restaurante.model.Mesa;
