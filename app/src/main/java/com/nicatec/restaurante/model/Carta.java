@@ -23,6 +23,7 @@ public class Carta {
     private LinkedList<Plato> mCarta = null;
     private static final String restauranteURL = "http://www.mocky.io/v2/5707f5ff1100002523e9465a";
 
+
     public static Carta getsInstance() {
         if ( sInstance == null ) {
             try {
@@ -59,8 +60,9 @@ public class Carta {
         InputStream input = null;
         try {
             url = new URL(restauranteURL);
+            //url = new URL(String.format("http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&appid=4cef94e2559e8f62a5f567ab654b0a70&units=metric&lang=sp", "Madrid"));
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
+            conn.connect();
 
             //esto me devuelve cuanto se ha bajado
             int responseLength = conn.getContentLength();
@@ -72,11 +74,35 @@ public class Carta {
             input = conn.getInputStream();
             StringBuilder sb = new StringBuilder();
             while ( (downloadedBytes = input.read()) != -1) {
-                sb.append(new String(data,0, downloadedBytes));
+                sb.append(new String(data,0, downloadedBytes,"UTF-8"));
             }
             Log.v("DOWNLOAD", String.format("downloaded", sb.toString()));
             //lo que recibo es un array de platos
-            JSONArray platosJSONArray = new JSONArray(sb.toString());
+            String a = "[\n" +
+                    "{\n" +
+                    "\"name\":\"Al Mondigas\",\n" +
+                    "\"pvp\":\"12.95\",\n" +
+                    "\"allergies\":[{\"a\":\"huevo\"}],\n" +
+                    "\"photo\":\"albondigas.jpg\",\n" +
+                    "\"comment\":\"Un plato redondito redondito para comer o jugar a las canicas\"\n" +
+                    "},\n" +
+                    "{\n" +
+                    "\"name\":\"Flan\",\n" +
+                    "\"pvp\":\"5.95\",\n" +
+                    "\"allergies\":[{\"a\":\"huevo\"}],\n" +
+                    "\"photo\":\"flan.jpg\",\n" +
+                    "\"comment\":\"Un postre delicioso\"\n" +
+                    "},\n" +
+                    "{\n" +
+                    "\"name\":\"Mac Arrones\",\n" +
+                    "\"pvp\":\"7.50\",\n" +
+                    "\"allergies\":[{\"a\":\"chorizo\"},{\"a\":\"gluten\"}],\n" +
+                    "\"photo\":\"macarrones.jpg\",\n" +
+                    "\"comment\":\"Comete un buen plato de estos, con o sin politicos\"\n" +
+                    "}\n" +
+                    "]";
+            //JSONArray platosJSONArray = new JSONArray(sb.toString());
+            JSONArray platosJSONArray = new JSONArray(a);
             //me recorro el array
             for (int index = 0; index <= platosJSONArray.length(); index++){
                 //creo las variables que hacen falta
@@ -101,7 +127,8 @@ public class Carta {
                     //añado la alergia al plato
                     p.addAlergia(jsonAlergias.getJSONObject(indexA).getString("a"));
                 }
-
+                //ya tengo el plato preparado, se lo añado a la carta
+                carta.mCarta.add(p);
             }
 
         } catch (Exception ex) {
