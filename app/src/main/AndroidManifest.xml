@@ -20,6 +20,14 @@
         <activity
             android:name=".activity.DetalleMesaActivity"
             android:label="@string/title_activity_detalle_mesa"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.SeleccionaPlatoActivity"
+            android:label="@string/title_activity_seleciona_plato"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.PlatoDetalleActivity"
+            android:label="@string/title_activity_plato_detalle"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

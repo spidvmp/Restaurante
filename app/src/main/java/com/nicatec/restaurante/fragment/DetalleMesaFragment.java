@@ -1,19 +1,20 @@
 package com.nicatec.restaurante.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.nicatec.restaurante.R;
-import com.nicatec.restaurante.model.Carta;
+import com.nicatec.restaurante.activity.SeleccionaPlatoActivity;
 import com.nicatec.restaurante.model.Mesa;
 import com.nicatec.restaurante.model.Mesas;
 import com.nicatec.restaurante.model.Plato;
@@ -71,7 +72,7 @@ public class DetalleMesaFragment extends Fragment {
         list.setAdapter(adapter);
 
         /*
-        //para enterarnos de que pulsan sobre una celda, hay que ...
+        //para enterarnos de que pulsan sobre una celda de , hay que ...
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -87,10 +88,28 @@ public class DetalleMesaFragment extends Fragment {
                 }
             }
         });
-    */
+        */
 
+        //miramos a ver si pulsan sonre añadir un plato a la mesa
+        Button add_plato = (Button) root.findViewById(R.id.add_button);
+        add_plato.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //saco la actividad con todos los platos, selecciona uno y se deberia añadir a la lista dela mesa
+                seleccionaPlatoDeLaCarta();
+            }
+        });
         return root;
     }
 
 
+    private void seleccionaPlatoDeLaCarta(){
+
+        //he de pasarle esta informacion a la actividad, como el delagado y la actividad lanzara el SeleccionaPlatoActivity
+        //tenemos que crear la actividad
+        Intent intent = new Intent(this, SeleccionaPlatoActivity.class);
+        intent.putExtra(SeleccionaPlatoActivity.EXTRA_MESA_INDEX, mMesa.getIndex());
+        startActivity(intent);
+
+    }
 }

@@ -5,6 +5,7 @@ import java.util.LinkedList;
 /**
  * Created by vtx on 5/4/16.
  * Esta clase define un plato, nombre, precio, etc
+ *
  */
 public class Plato {
     private String mNombre;

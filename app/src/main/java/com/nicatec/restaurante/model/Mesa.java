@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 /**
  * Created by vtx on 5/4/16.
- * esta clase tiene el numero de mesa y un array con los platos pedidos por los clientes.
+ * Modelo de la infromacion que guardo de una mesa, numero de mesa que se, esta vacia o no y un array con los platos que ha pedido
  */
 public class Mesa {
 
@@ -88,4 +88,6 @@ public class Mesa {
     public void setmPlatos(LinkedList<Plato> mPlatos) {
         this.mPlatos = mPlatos;
     }
+
+    public int getIndex() { return  (this.mNumero - 1); }
 }

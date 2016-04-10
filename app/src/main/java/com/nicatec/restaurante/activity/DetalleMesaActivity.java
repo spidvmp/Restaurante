@@ -2,16 +2,18 @@ package com.nicatec.restaurante.activity;
 
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.view.MenuItem;
 
 import com.nicatec.restaurante.R;
 import com.nicatec.restaurante.fragment.DetalleMesaFragment;
-import com.nicatec.restaurante.model.Mesa;
-import com.nicatec.restaurante.model.Mesas;
+
+/*
+Detalle de una mesa, cuando se selecciona un a mesa en mesasActivity, muestra el detalle de la mesa y los platos que han pedido, aqui se
+añaden nuevos platos y se da la opcion de pedir la cuenta. Utiliza el frgament DetalleMesasFragmnet para mostrar la lista de los platos y
+el resto de la informacion de la mesa
+ */
 
 public class DetalleMesaActivity extends AppCompatActivity {
 
@@ -21,10 +23,13 @@ public class DetalleMesaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_mesa);
-        /*
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +50,20 @@ public class DetalleMesaActivity extends AppCompatActivity {
                     .add(R.id.fragment_detalle_mesa, DetalleMesaFragment.newInstance(index))
                     .commit();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        boolean superValue = super.onOptionsItemSelected(item);
+
+        if (item.getItemId() == android.R.id.home) {
+            // Han pulsado la flecha de back de la Action Bar, finalizamos la actividad
+            finish();
+
+            return true;
+        }
+
+        return superValue;
     }
 
 }

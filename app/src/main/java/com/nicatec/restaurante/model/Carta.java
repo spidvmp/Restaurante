@@ -15,6 +15,8 @@ import java.util.LinkedList;
 
 /**
  * Created by vtx on 8/4/16.
+ * Modelo de la lista de Platos que tiene el restaurante. El listado de platos que tiene se baja de un JSON
+ * Es un singleton ya que esta lista va a ser unica
  */
 public class Carta {
 
@@ -76,7 +78,7 @@ public class Carta {
             while ( (downloadedBytes = input.read()) != -1) {
                 sb.append(new String(data,0, downloadedBytes,"UTF-8"));
             }
-            Log.v("DOWNLOAD", String.format("downloaded", sb.toString()));
+            Log.v("DOWNLOAD", String.format("downloaded sb=", sb.toString()));
             //lo que recibo es un array de platos
             String a = "[\n" +
                     "{\n" +

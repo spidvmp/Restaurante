@@ -11,8 +11,13 @@ import com.nicatec.restaurante.R;
 import com.nicatec.restaurante.fragment.MesasListFragment;
 import com.nicatec.restaurante.model.Carta;
 import com.nicatec.restaurante.model.Mesa;
+/*
+Actividad inicial, muestra una lista con las mesas que tiene el restaurante, lo primero que hace, ya que no tiene persistencia,
+es bajarse la carta de platos y guaradarlos en el modelo Carta. Tiene un fragment MesasListFragment para mostrar la lista de mesas
+ */
 
 public class MesasActivity extends AppCompatActivity implements MesasListFragment.MesasListListener {
+
 
 
     @Override
