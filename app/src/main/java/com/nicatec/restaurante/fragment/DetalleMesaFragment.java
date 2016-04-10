@@ -2,10 +2,9 @@ package com.nicatec.restaurante.fragment;
 
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.nicatec.restaurante.R;
-import com.nicatec.restaurante.activity.SeleccionaPlatoActivity;
 import com.nicatec.restaurante.model.Mesa;
 import com.nicatec.restaurante.model.Mesas;
 import com.nicatec.restaurante.model.Plato;

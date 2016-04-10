@@ -44,7 +44,7 @@ public class Mesa {
         float precio = 0.0f;
         for (Integer i=0; i<= mPlatos.size(); i++)
             //voy sumando los precios
-            precio += mPlatos.get(i).getmPrecio();
+            precio += mPlatos.get(i).getPrecio();
 
         //sesupone que se han ido, vacio la mesa
         limpiarMesa();

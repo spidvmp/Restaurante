@@ -27,15 +27,16 @@ public class Plato {
         this.mAlergias.add(alergia);
     }
 
-    public String getmNombre() {
+    public String getNombre() {
         return mNombre;
     }
 
-    public float getmPrecio() {
+    public float getPrecio() {
         return mPrecio;
     }
+    public String getPrecioString() { return String.format("%f€",mPrecio);}
 
-    public String getmFoto() {
+    public String getFoto() {
         return mFoto;
     }
     public String toString() { return mNombre; }

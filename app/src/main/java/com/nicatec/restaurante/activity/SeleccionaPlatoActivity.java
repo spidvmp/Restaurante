@@ -63,7 +63,7 @@ public class SeleccionaPlatoActivity extends AppCompatActivity implements  Selec
 
         //saco la pantall del detalle del plato, donde apaece toda la informacion
         Intent intent = new Intent(this, PlatoDetalleActivity.class);
-        intent.putExtra(PlatoDetalleActivity.EXTRA_PLATO, position);
+        intent.putExtra(PlatoDetalleActivity.EXTRA_PLATO_INDEX, position);
         startActivity(intent);
 
     }
