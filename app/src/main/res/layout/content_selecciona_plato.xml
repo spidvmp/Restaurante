@@ -10,6 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.SeleccionaPlatoActivity"
-    tools:showIn="@layout/activity_seleciona_plato">
+    tools:showIn="@layout/activity_selecciona_plato">
 
 </RelativeLayout>

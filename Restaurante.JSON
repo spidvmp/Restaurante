@@ -19,5 +19,26 @@
 "allergies":[{"a":"chorizo"},{"a":"gluten"}],
 "photo":"macarrones.jpg",
 "comment":"Comete un buen plato de estos, con o sin politicos"
+},
+{
+"name":"Cocreta de la abuela",
+"pvp":"8.45",
+"allergies":[],
+"photo":"croqueta.jpg",
+"comment":"Deliciosas cocretas de la abulita hechas a mano con jamon 10J y 4K"
+},
+{
+"name":"Tirame el Zu",
+"pvp":"6.4",
+"allergies":[],
+"photo":"tiramisu.jpg",
+"commnet":"Deliciosos postre hecho con queso mascarpone"
+},
+{
+"name":"Estofado de ternera",
+"pvp":"20.00",
+"allergies":[],
+"photo":"estofado.jpg",
+"comment":"Estofado de ternera similar al que salen en todas las peliculas del oeste cuando llegan a una casa y hay una dama"
 }
 ]

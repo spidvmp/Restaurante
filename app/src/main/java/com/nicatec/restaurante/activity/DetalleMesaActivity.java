@@ -1,6 +1,7 @@
 package com.nicatec.restaurante.activity;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,7 +16,7 @@ añaden nuevos platos y se da la opcion de pedir la cuenta. Utiliza el frgament 
 el resto de la informacion de la mesa
  */
 
-public class DetalleMesaActivity extends AppCompatActivity {
+public class DetalleMesaActivity extends AppCompatActivity implements DetalleMesaFragment.DetalleMesaListener {
 
     public static final String EXTRA_MESA_INDEX = "EXTRA_MESA_INDEX";
 
@@ -66,4 +67,13 @@ public class DetalleMesaActivity extends AppCompatActivity {
         return superValue;
     }
 
+
+
+    @Override
+    public void addPlatoOnMesa(int mesaIndex) {
+        //estoy en una mesa y han seleccionado que quieren añadir un plato, me pasan el indice de la mesa donde añadir
+        Intent intent = new Intent(this, SeleccionaPlatoActivity.class);
+        intent.putExtra(SeleccionaPlatoActivity.EXTRA_MESA, mesaIndex);
+        startActivity(intent);
+    }
 }

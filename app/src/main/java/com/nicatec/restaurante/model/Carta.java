@@ -51,9 +51,13 @@ public class Carta {
         return mCarta.get(index);
     }
 
+    public LinkedList<Plato> getPlatos() { return mCarta; }
+
     public int getCartaCount(){
         return  mCarta.size();
     }
+
+    public void addPlato(Plato p) { mCarta.add(p); }
 
     private static Carta downloadInfo() throws MalformedURLException {
         Carta carta = new Carta();
@@ -130,10 +134,12 @@ public class Carta {
                     p.addAlergia(jsonAlergias.getJSONObject(indexA).getString("a"));
                 }
                 //ya tengo el plato preparado, se lo añado a la carta
-                carta.mCarta.add(p);
+                carta.addPlato(p);
             }
 
+            Log.v("CARTA","Termine de bajarme el JSON");
         } catch (Exception ex) {
+            Log.v("DOWNLOAD CARTA", "Error con la conexion");
             ex.printStackTrace();
         }
 

@@ -1,6 +1,8 @@
 package com.nicatec.restaurante.fragment;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -26,6 +28,8 @@ public class DetalleMesaFragment extends Fragment {
     private static final String ARG_MESA_INDEX = "ARG_MESA_INDEX";
     private static Mesa mMesa;
 
+    private DetalleMesaListener mDetalleMesaListener;
+
 
     public static DetalleMesaFragment newInstance(int position) {
         //esto devuelve un DEtallemesafragment y ha recibido un paramtro
@@ -48,7 +52,7 @@ public class DetalleMesaFragment extends Fragment {
         //saco los argumentos, que sera el index de la mesa, ya me quedo con la mesa que es
         if ( getArguments() != null )
             mMesa = Mesas.getInstance().getMesa(getArguments().getInt(ARG_MESA_INDEX));
-        Log.v("DetalleMesaFrgamnent", "Mesa " + mMesa.getmNumero());
+        Log.v("DetalleMesaFragamnent", "Mesa " + mMesa.getmNumero());
 
     }
 
@@ -90,7 +94,8 @@ public class DetalleMesaFragment extends Fragment {
         });
         */
 
-        //miramos a ver si pulsan sonre añadir un plato a la mesa
+        //miramos a ver si pulsan sobre añadir un plato a la mesa, si lo hacen tengo que sacar un listado de platos
+
         Button add_plato = (Button) root.findViewById(R.id.add_button);
         add_plato.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,10 +111,46 @@ public class DetalleMesaFragment extends Fragment {
     private void seleccionaPlatoDeLaCarta(){
 
         //he de pasarle esta informacion a la actividad, como el delagado y la actividad lanzara el SeleccionaPlatoActivity
+        //le paso la mesa de la que estoy hablando para que en caso de seleccionar un plato, pase a su vez el numero de mesa para que se incluya
+        //en el listado de platos pedidos por la mesa
+
+        //tengo que pasar la mesa al detalleActivity para que lance el listado de platos, lo hago usando el listener y el interface
+        if ( mDetalleMesaListener != null) {
+            mDetalleMesaListener.addPlatoOnMesa(mMesa.getIndex());
+        }
+
+
+
+    /*
         //tenemos que crear la actividad
         Intent intent = new Intent(this, SeleccionaPlatoActivity.class);
-        intent.putExtra(SeleccionaPlatoActivity.EXTRA_MESA_INDEX, mMesa.getIndex());
+        intent.putExtra(SeleccionaPlatoActivity.EXTRA_MESA, mMesa.getIndex());
         startActivity(intent);
+*/
+    }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        mDetalleMesaListener = (DetalleMesaListener) activity;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mDetalleMesaListener = (DetalleMesaListener) getActivity();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+        mDetalleMesaListener = null;
+    }
+    public interface DetalleMesaListener {
+        //si pulsan sobre el boton de add, he de sacar la lista de los platos para añadir en una mesa, paso el indice de la mesa
+        void addPlatoOnMesa(int  mesaIndex);
     }
 }

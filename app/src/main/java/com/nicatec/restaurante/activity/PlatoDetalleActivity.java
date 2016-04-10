@@ -10,7 +10,7 @@ import android.view.View;
 import com.nicatec.restaurante.R;
 
 /*
-Se muestra el detalle del plato. Se llega o pulsando desde el listado de platos que se han pedido en un amesa o dede la seleccion de un nuevo plato
+Se muestra el detalle del plato. Se llega o pulsando desde el listado de platos que se han pedido en una mesa o dede la seleccion de un nuevo plato
 Se pone la opcion de añadir el plato al pedido de la mesa siempre que se haya llegado desde la seleccion del plato
 DE cualquier otra forma, se muestra la opcion de poner los comentarios del camarero
  */
@@ -23,7 +23,7 @@ public class PlatoDetalleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_plato_detalle);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+/*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +32,7 @@ public class PlatoDetalleActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+       */
     }
 
 }

@@ -7,4 +7,5 @@
     <string name="add_plato">+ Plato</string>
     <string name="title_activity_seleciona_plato">SelecionaPlatoActivity</string>
     <string name="title_activity_plato_detalle">PlatoDetalleActivity</string>
+    <string name="carta_title">Carta</string>
 </resources>
