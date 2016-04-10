@@ -1,6 +1,7 @@
 package com.nicatec.restaurante.activity;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,11 +15,13 @@ Me pasan la mesas desde donde se ha solicitado añadir un plato, y si selecciona
 y se lo añado a la mesa que ya tengo
  */
 
-public class SeleccionaPlatoActivity extends AppCompatActivity {
+public class SeleccionaPlatoActivity extends AppCompatActivity implements  SeleccionaPlatoFragment.SelectPlatoListener{
     public static final String EXTRA_MESA = "EXTRA_MESA";
 
     //me pasan el indice de la mesa desde donde han seleccionado nuevo plato,
     private int mMesaIndex;
+    //me psasn tambien el indice del plato seleccionado
+    private int mPlatoIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,4 +55,16 @@ public class SeleccionaPlatoActivity extends AppCompatActivity {
         */
     }
 
+    @Override
+    public void onPlatoSelected(int position) {
+        //han selecionado un plato. Lo manodo a otra actividad, para que muestre el detalle del plato
+        //me lo guardo y luego lo usare cuando acepten el plato
+        mPlatoIndex = position;
+
+        //saco la pantall del detalle del plato, donde apaece toda la informacion
+        Intent intent = new Intent(this, PlatoDetalleActivity.class);
+        intent.putExtra(PlatoDetalleActivity.EXTRA_PLATO, position);
+        startActivity(intent);
+
+    }
 }
