@@ -32,10 +32,10 @@ public class SeleccionaPlatoFragment extends Fragment {
         final Carta carta = Carta.getsInstance();
 
         //tengo una lista con todos los platos que existen en la carta
-        ListView listView = (ListView) root.findViewById(R.id.list);
+        ListView list = (ListView) root.findViewById(android.R.id.list);
         //creamos el adaptador para darselo a la lista
         ArrayAdapter<Plato> adapter = new ArrayAdapter<Plato>(getActivity(), android.R.layout.simple_list_item_1, carta.getPlatos());
-        listView.setAdapter(adapter);
+        list.setAdapter(adapter);
 
 
 

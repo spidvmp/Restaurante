@@ -1,13 +1,11 @@
 package com.nicatec.restaurante.model;
 
-import android.os.AsyncTask;
 import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.InputStream;
-import java.math.MathContext;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -66,7 +64,6 @@ public class Carta {
         InputStream input = null;
         try {
             url = new URL(restauranteURL);
-            //url = new URL(String.format("http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&appid=4cef94e2559e8f62a5f567ab654b0a70&units=metric&lang=sp", "Madrid"));
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.connect();
 
@@ -79,11 +76,12 @@ public class Carta {
             int downloadedBytes;
             input = conn.getInputStream();
             StringBuilder sb = new StringBuilder();
-            while ( (downloadedBytes = input.read()) != -1) {
-                sb.append(new String(data,0, downloadedBytes,"UTF-8"));
+            while ( (downloadedBytes = input.read(data)) != -1) {
+                sb.append(new String(data,0, downloadedBytes));
             }
             Log.v("DOWNLOAD", String.format("downloaded sb=", sb.toString()));
             //lo que recibo es un array de platos
+            /*
             String a = "[\n" +
                     "{\n" +
                     "\"name\":\"Al Mondigas\",\n" +
@@ -107,10 +105,11 @@ public class Carta {
                     "\"comment\":\"Comete un buen plato de estos, con o sin politicos\"\n" +
                     "}\n" +
                     "]";
-            //JSONArray platosJSONArray = new JSONArray(sb.toString());
-            JSONArray platosJSONArray = new JSONArray(a);
+             */
+            JSONArray platosJSONArray = new JSONArray(sb.toString());
+            //JSONArray platosJSONArray = new JSONArray(a);
             //me recorro el array
-            for (int index = 0; index <= platosJSONArray.length(); index++){
+            for (int index = 0; index < platosJSONArray.length(); index++){
                 //creo las variables que hacen falta
                 String nombre = null;
                 String foto = null;

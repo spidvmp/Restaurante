@@ -32,11 +32,13 @@ public class MesasActivity extends AppCompatActivity implements MesasListFragmen
                 return Carta.getsInstance();
             }
 
+            /*
             @Override
             protected void onPostExecute(Carta carta)   {
                 super.onPostExecute(carta);
 
             }
+            */
         };
         cartaDownloader.execute();
 
