@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,6 +56,16 @@ public class PlatoDetalleFragment extends Fragment {
         TextView nombre = (TextView) root.findViewById(R.id.nombre);
         TextView precio = (TextView) root.findViewById(R.id.precio);
 
+        Button add_plato = (Button) root.findViewById(R.id.add_button);
+        add_plato.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //hay que añadir el plato. La actividad tiene la mesa y aqui le paso el plato
+                if ( mPlatoDetalleListener != null )
+                    mPlatoDetalleListener.addPlatoALaMesa(getArguments().getInt(ARG_PLATO_INDEX));
+            }
+        });
+
         nombre.setText(mPlato.getNombre());
         precio.setText(mPlato.getPrecioString());
 
@@ -84,7 +95,7 @@ public class PlatoDetalleFragment extends Fragment {
     }
 
     public interface  PlatoDetalleListener {
-
+        void addPlatoALaMesa(int position);
 
     }
 }

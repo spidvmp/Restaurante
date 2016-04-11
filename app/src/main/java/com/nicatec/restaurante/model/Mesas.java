@@ -42,4 +42,9 @@ public class Mesas {
     public LinkedList<Mesa> getMesas(){
         return mMesas;
     }
+
+    public void addPlatoEnIndexMesa(Plato plato, int indexMesa) {
+        //me pasan un plato y se lo tengo que añadir a una mesa que viene referenciada por su posicion.
+        mMesas.get(indexMesa).addPlato(plato);
+    }
 }

@@ -63,7 +63,7 @@ public class Mesa {
         return String.format("Mesa %d", mNumero);
     }
 
-    public Boolean getmLaMesaEstaVacia() {
+    public Boolean getLaMesaEstaVacia() {
         return mLaMesaEstaVacia;
     }
 
@@ -71,11 +71,11 @@ public class Mesa {
         this.mLaMesaEstaVacia = mLaMesaEstaVacia;
     }
 
-    public Integer getmNumero() {
+    public Integer getNumero() {
         return mNumero;
     }
 
-    public void setmNumero(Integer numero) {
+    public void setNumero(Integer numero) {
         this.mNumero = numero;
     }
 
@@ -85,7 +85,7 @@ public class Mesa {
         return mPlatos;
     }
 
-    public void setmPlatos(LinkedList<Plato> mPlatos) {
+    public void setPlatos(LinkedList<Plato> mPlatos) {
         this.mPlatos = mPlatos;
     }
 

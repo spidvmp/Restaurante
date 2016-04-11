@@ -50,7 +50,7 @@ public class DetalleMesaFragment extends Fragment {
         //saco los argumentos, que sera el index de la mesa, ya me quedo con la mesa que es
         if ( getArguments() != null )
             mMesa = Mesas.getInstance().getMesa(getArguments().getInt(ARG_MESA_INDEX));
-        Log.v("DetalleMesaFragamnent", "Mesa " + mMesa.getmNumero());
+        Log.v("DetalleMesaFragamnent", "Mesa " + mMesa.getNumero());
 
     }
 
