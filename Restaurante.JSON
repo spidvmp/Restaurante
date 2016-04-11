@@ -40,5 +40,20 @@
 "allergies":[],
 "photo":"estofado.jpg",
 "comment":"Estofado de ternera similar al que salen en todas las peliculas del oeste cuando llegan a una casa y hay una dama"
+},
+{
+"name":"Col y flor",
+"pvp":"6.47",
+"allergies":[],
+"photo":"coliflor.jpg",
+"comment":"Alimento sanisimo que les encanta a los niños, te comes 2 cosas una col y una flor"
+},
+{
+"name":"Papaya",
+"pvp":"5.95",
+"allergies":[],
+"photo":"papaya.jpg",
+"comment":"Recientraida de la casa de julio Iglesias"
 }
+
 ]

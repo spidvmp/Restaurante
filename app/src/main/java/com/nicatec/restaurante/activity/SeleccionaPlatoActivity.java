@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.PluralsRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.nicatec.restaurante.R;
 import com.nicatec.restaurante.fragment.PlatoDetalleFragment;
@@ -24,6 +25,7 @@ y se lo añado a la mesa que ya tengo
 public class SeleccionaPlatoActivity extends AppCompatActivity implements  SeleccionaPlatoFragment.SelectPlatoListener,
         PlatoDetalleActivity.PlatoDetalleListener{
     public static final String EXTRA_MESA = "EXTRA_MESA";
+    public static final String EXTRA_PLATO_SELECCIONADO = "EXTRA_PLATO_SELECCIONADO";
 
     //me pasan el indice de la mesa desde donde han seleccionado nuevo plato,
     private int mMesaIndex;
@@ -41,7 +43,14 @@ public class SeleccionaPlatoActivity extends AppCompatActivity implements  Selec
 
         //me quedo con la mesa que usare mas adelante
         mMesaIndex = getIntent().getIntExtra(EXTRA_MESA,0);
+        mPlatoIndex = getIntent().getIntExtra(EXTRA_PLATO_SELECCIONADO,-1);
 
+        //compruebo si tengo EXTRA_PLATO_SELECCIONADO
+        if ( mPlatoIndex != -1 ){
+            //me hanpasado el plato,, eso es que vengo de seleccionarlo. grabo y me piro
+            Log.v("SELECCIONAPLATOACTIVITY", "tengo plato, deberia guardar y marcharme");
+            addEnLaMesaElPlato(getIntent().getIntExtra(EXTRA_PLATO_SELECCIONADO,-1));
+        }
 
         FragmentManager fm = getFragmentManager();
         if ( fm.findFragmentById(R.id.fragment_selecciona_plato) == null){

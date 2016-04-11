@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.nicatec.restaurante.R;
 import com.nicatec.restaurante.fragment.PlatoDetalleFragment;
@@ -42,6 +43,7 @@ public class PlatoDetalleActivity extends AppCompatActivity implements PlatoDeta
             fm.beginTransaction()
                     .add(R.id.fragment_plato_detalle, PlatoDetalleFragment.newInstance(index))
                     .commit();
+
         }
 
     }
@@ -51,7 +53,12 @@ public class PlatoDetalleActivity extends AppCompatActivity implements PlatoDeta
     public void addPlatoALaMesa(int position) {
         //estoy en una mesa y han seleccionado que quieren añadir un plato, me pasan el indice de la mesa donde añadir
         //he de pasarlo al SeleccionaPlatoActivity, para que añada el plato a la mesa
-        mPlatoDetalleListener.addEnLaMesaElPlato(position);
+        Log.v("PLATODETALLEACTIVITY", "Recibo el plato a añadir");
+        //mPlatoDetalleListener.addEnLaMesaElPlato(position);
+        Intent intent = new Intent(getBaseContext(), SeleccionaPlatoActivity.class);
+        intent.putExtra(SeleccionaPlatoActivity.EXTRA_PLATO_SELECCIONADO, position);
+        startActivity(intent);
+        finish();
 
 
     }
