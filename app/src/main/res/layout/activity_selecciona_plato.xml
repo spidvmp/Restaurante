@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     tools:context=".activity.SeleccionaPlatoActivity">
 
-
+<!--
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,6 +23,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_selecciona_plato" />
+    -->
 
 <!--
     <android.support.design.widget.FloatingActionButton
@@ -33,6 +34,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_dialog_email" />
 -->
+    <include layout="@layout/toolbar_main"></include>
     <LinearLayout
         android:id="@+id/fragment_selecciona_plato"
         android:orientation="vertical"

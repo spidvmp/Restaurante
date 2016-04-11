@@ -1,18 +1,14 @@
 package com.nicatec.restaurante.activity;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 
 import com.nicatec.restaurante.R;
 import com.nicatec.restaurante.fragment.PlatoDetalleFragment;
-import com.nicatec.restaurante.model.Carta;
-import com.nicatec.restaurante.model.Mesa;
-import com.nicatec.restaurante.model.Mesas;
-import com.nicatec.restaurante.model.Plato;
 
 /*
 Se muestra el detalle del plato. Se llega o pulsando desde el listado de platos que se han pedido en una mesa o dede la seleccion de un nuevo plato
@@ -24,8 +20,6 @@ public class PlatoDetalleActivity extends AppCompatActivity implements PlatoDeta
 
     public static final String EXTRA_PLATO_INDEX = "EXTRA_PLATO";
 
-    //me creo un listener para hacer un interface y pasar la informcion del plato pedido al seleccionaplatoactivity
-    private PlatoDetalleListener mPlatoDetalleListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +47,14 @@ public class PlatoDetalleActivity extends AppCompatActivity implements PlatoDeta
     public void addPlatoALaMesa(int position) {
         //estoy en una mesa y han seleccionado que quieren añadir un plato, me pasan el indice de la mesa donde añadir
         //he de pasarlo al SeleccionaPlatoActivity, para que añada el plato a la mesa
-        Log.v("PLATODETALLEACTIVITY", "Recibo el plato a añadir");
+        //Log.v("PLATODETALLEACTIVITY", "Recibo el plato a añadir");
         //mPlatoDetalleListener.addEnLaMesaElPlato(position);
-        Intent intent = new Intent(getBaseContext(), SeleccionaPlatoActivity.class);
-        intent.putExtra(SeleccionaPlatoActivity.EXTRA_PLATO_SELECCIONADO, position);
-        startActivity(intent);
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra(SeleccionaPlatoActivity.EXTRA_PLATO_SELECCIONADO, position);
+        setResult(Activity.RESULT_OK, returnIntent);
         finish();
 
 
     }
 
-    public interface PlatoDetalleListener {
-        void addEnLaMesaElPlato(int position);
-    }
 }
