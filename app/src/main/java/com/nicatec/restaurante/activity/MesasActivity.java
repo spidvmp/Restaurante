@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.nicatec.restaurante.R;
@@ -41,8 +42,12 @@ public class MesasActivity extends AppCompatActivity implements MesasListFragmen
             */
         };
         cartaDownloader.execute();
-
-
+/*
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //toolbar.setTitle("Restaurante");
+        setSupportActionBar(toolbar);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+*/
 
         FragmentManager fm = getFragmentManager();
         if ( fm.findFragmentById(R.id.fragment_mesas_list) == null){

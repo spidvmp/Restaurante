@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.nicatec.restaurante.R;
 import com.nicatec.restaurante.fragment.DetalleMesaFragment;
+import com.nicatec.restaurante.model.Mesas;
 
 /*
 Detalle de una mesa, cuando se selecciona un a mesa en mesasActivity, muestra el detalle de la mesa y los platos que han pedido, aqui se
@@ -25,21 +26,14 @@ public class DetalleMesaActivity extends AppCompatActivity implements DetalleMes
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_mesa);
 
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("");
         setSupportActionBar(toolbar);
+        //toolbar.setTitle (Mesas.getInstance().getMesa(getIntent().getIntExtra(EXTRA_MESA_INDEX,0)).toString());
+        toolbar.setTitle("");
+        //esto pone un back
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        */
 
         //Añado el fragmen, compruebo que no exista ya
         FragmentManager fm = getFragmentManager();

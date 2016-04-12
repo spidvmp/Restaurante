@@ -25,9 +25,11 @@ public class PlatoDetalleActivity extends AppCompatActivity implements PlatoDeta
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plato_detalle);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        
         //Añado el fragmen, compruebo que no exista ya
         FragmentManager fm = getFragmentManager();
         if ( fm.findFragmentById(R.id.fragment_plato_detalle) == null) {

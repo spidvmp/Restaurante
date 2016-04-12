@@ -40,7 +40,7 @@ public class MesasListFragment extends Fragment {
         final Mesas mesas = Mesas.getInstance();
 
         // Inflate the layout for this fragment
-        View root =  inflater.inflate(R.layout.fragment_mesas_list, container, false);
+        View root =  inflater.inflate(R.layout.fragment_mesas, container, false);
 
         //accedo a las mesas, ya tengo acceso al array
         ListView list = (ListView) root.findViewById(android.R.id.list);
