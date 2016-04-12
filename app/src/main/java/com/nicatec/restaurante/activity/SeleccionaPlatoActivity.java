@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.nicatec.restaurante.R;
 import com.nicatec.restaurante.fragment.SeleccionaPlatoFragment;
@@ -49,6 +50,20 @@ public class SeleccionaPlatoActivity extends AppCompatActivity implements  Selec
 
         }
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        boolean superValue = super.onOptionsItemSelected(item);
+
+        if (item.getItemId() == android.R.id.home) {
+            // Han pulsado la flecha de back de la Action Bar, finalizamos la actividad
+            finish();
+
+            return true;
+        }
+
+        return superValue;
     }
 
     @Override

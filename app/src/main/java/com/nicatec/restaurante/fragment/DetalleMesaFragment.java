@@ -28,6 +28,7 @@ public class DetalleMesaFragment extends Fragment {
     private static Mesa mMesa;
 
     private DetalleMesaListener mDetalleMesaListener;
+    private ListView list;
 
 
     public static DetalleMesaFragment newInstance(int position) {
@@ -68,7 +69,7 @@ public class DetalleMesaFragment extends Fragment {
         //TextView nombre = (TextView) root.findViewById(R.id.nombre_mesa);
         //nombre.setText(mMesa.toString());
         //tabla de platos pedidos
-        ListView list = (ListView) root.findViewById(R.id.list);
+        this.list = (ListView) root.findViewById(R.id.list);
 
         //creamos un adaptador para darselo a la lista y que sepa que datos mostrar
         //le tengo que meter el array que esta dentro de la mesa pedida
@@ -76,40 +77,16 @@ public class DetalleMesaFragment extends Fragment {
 
         //le asignamos el adaptador a la vista;
         list.setAdapter(adapter);
-
-        /*
-        //para enterarnos de que pulsan sobre una celda de , hay que ...
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //le digo a mi actividad que han pulsado una celda
-                //compruebo que estoy enganchado a la actividad ( con el onAttach )
-                if ( mMesasListListener != null ){
-                    //aviso al listener
-                    //obtengo la mesa pulsada
-                    Mesa mesaSelected = mesas.getMesa(position);
-                    mMesasListListener.onMesaSelected(mesaSelected,position);
-
-
-                }
-            }
-        });
-        */
-
-        //miramos a ver si pulsan sobre añadir un plato a la mesa, si lo hacen tengo que sacar un listado de platos
-/*
-        Button add_plato = (Button) root.findViewById(R.id.add_button);
-        add_plato.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //saco la actividad con todos los platos, selecciona uno y se deberia añadir a la lista dela mesa
-                seleccionaPlatoDeLaCarta();
-            }
-        });
-        */
         return root;
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //vuelvo a recargar la tabla, es posible ue haya una forma mejor
+        this.list.invalidateViews();
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -129,7 +106,7 @@ public class DetalleMesaFragment extends Fragment {
                     mDetalleMesaListener.addPlatoOnMesa(mMesa.getIndex());
                 }
                 return true;
-                
+
 
         }
         return superValue;
@@ -147,28 +124,7 @@ public class DetalleMesaFragment extends Fragment {
         }
 
     }
-/*
-    private void seleccionaPlatoDeLaCarta(){
 
-        //he de pasarle esta informacion a la actividad, como el delagado y la actividad lanzara el SeleccionaPlatoActivity
-        //le paso la mesa de la que estoy hablando para que en caso de seleccionar un plato, pase a su vez el numero de mesa para que se incluya
-        //en el listado de platos pedidos por la mesa
-
-        //tengo que pasar la mesa al detalleActivity para que lance el listado de platos, lo hago usando el listener y el interface
-        if ( mDetalleMesaListener != null) {
-            mDetalleMesaListener.addPlatoOnMesa(mMesa.getIndex());
-        }
-
-
-
-    /*
-        //tenemos que crear la actividad
-        Intent intent = new Intent(this, SeleccionaPlatoActivity.class);
-        intent.putExtra(SeleccionaPlatoActivity.EXTRA_MESA, mMesa.getIndex());
-        startActivity(intent);
-
-    }
-*/
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
