@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,7 @@ public class PlatoDetalleFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if ( getArguments() != null ){
             mPlato = Carta.getsInstance().getPlato(getArguments().getInt(ARG_PLATO_INDEX));
+            updateTitle(mPlato.toString());
         }
     }
 
@@ -71,6 +73,19 @@ public class PlatoDetalleFragment extends Fragment {
 
 
         return root;
+    }
+
+    void updateTitle(String newTitle){
+        if (getActivity() instanceof AppCompatActivity) {
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+
+            // 2) Acceder, dentro de la actividad, a la ActionBar
+            android.support.v7.app.ActionBar actionBar = activity.getSupportActionBar();
+
+            // 3) Cambiar el texto a la toolbar
+            actionBar.setTitle(newTitle);
+        }
+
     }
 
     @Override

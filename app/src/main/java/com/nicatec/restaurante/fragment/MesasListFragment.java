@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +74,19 @@ public class MesasListFragment extends Fragment {
         return root;
     }
 
+    void updateTitle(String newTitle){
+        if (getActivity() instanceof AppCompatActivity) {
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+
+            // 2) Acceder, dentro de la actividad, a la ActionBar
+            android.support.v7.app.ActionBar actionBar = activity.getSupportActionBar();
+
+            // 3) Cambiar el texto a la toolbar
+            actionBar.setTitle(newTitle);
+        }
+
+    }
+    
     //estos metodos se implementan para asegurarnos que cuando se toque una celda, el fragmen y la actividad esten conectados,
     // si no lo estan daria un error y cascaria. Hay que implementar los 2 , el deprecated es para los dispositivos antiguos
     @Override

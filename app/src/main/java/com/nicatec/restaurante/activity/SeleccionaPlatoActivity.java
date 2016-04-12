@@ -36,8 +36,6 @@ public class SeleccionaPlatoActivity extends AppCompatActivity implements  Selec
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(R.string.carta_title);
-        //esto pone un back
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //me quedo con la mesa que usare mas adelante

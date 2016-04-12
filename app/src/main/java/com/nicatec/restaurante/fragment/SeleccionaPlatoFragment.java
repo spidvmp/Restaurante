@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,12 @@ public class SeleccionaPlatoFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        updateTitle("Selecciona Plato");
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -49,10 +56,25 @@ public class SeleccionaPlatoFragment extends Fragment {
             if ( mPlatoListener != null ){
                 mPlatoListener.onPlatoSelected(position);
             }
+
+
         }
     });
 
         return root;
+    }
+
+    void updateTitle(String newTitle){
+        if (getActivity() instanceof AppCompatActivity) {
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+
+            // 2) Acceder, dentro de la actividad, a la ActionBar
+            android.support.v7.app.ActionBar actionBar = activity.getSupportActionBar();
+
+            // 3) Cambiar el texto a la toolbar
+            actionBar.setTitle(newTitle);
+        }
+
     }
 
     @Override

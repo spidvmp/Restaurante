@@ -9,4 +9,6 @@
     <string name="title_activity_plato_detalle">PlatoDetalleActivity</string>
     <string name="carta_title">Carta</string>
     <string name="listado_platos_title">Listado de Platos</string>
+    <string name="dolorosa">La Dolorosa</string>
+    <string name="plato_comanda">+ Plato</string>
 </resources>

@@ -5,14 +5,15 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.nicatec.restaurante.R;
 import com.nicatec.restaurante.model.Mesa;
@@ -48,10 +49,13 @@ public class DetalleMesaFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         //saco los argumentos, que sera el index de la mesa, ya me quedo con la mesa que es
-        if ( getArguments() != null )
+        if ( getArguments() != null ) {
             mMesa = Mesas.getInstance().getMesa(getArguments().getInt(ARG_MESA_INDEX));
-        Log.v("DetalleMesaFragamnent", "Mesa " + mMesa.getNumero());
+            updateTitle(mMesa.toString());
+        }
 
+        //indicamos que toolbar tiene opciones
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -61,8 +65,8 @@ public class DetalleMesaFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_detalle_mesa, container, false);
 
         //saco las referencias de los elementos de la vista
-        TextView nombre = (TextView) root.findViewById(R.id.nombre_mesa);
-        nombre.setText(mMesa.toString());
+        //TextView nombre = (TextView) root.findViewById(R.id.nombre_mesa);
+        //nombre.setText(mMesa.toString());
         //tabla de platos pedidos
         ListView list = (ListView) root.findViewById(R.id.list);
 
@@ -93,7 +97,7 @@ public class DetalleMesaFragment extends Fragment {
         */
 
         //miramos a ver si pulsan sobre añadir un plato a la mesa, si lo hacen tengo que sacar un listado de platos
-
+/*
         Button add_plato = (Button) root.findViewById(R.id.add_button);
         add_plato.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,10 +106,48 @@ public class DetalleMesaFragment extends Fragment {
                 seleccionaPlatoDeLaCarta();
             }
         });
+        */
         return root;
     }
 
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.detallemesa, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        boolean superValue =  super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.dolorosa:
+                break;
+            case R.id.addplatocomanda:
+                //tengo que pasar la mesa al detalleActivity para que lance el listado de platos, lo hago usando el listener y el interface
+                if ( mDetalleMesaListener != null) {
+                    mDetalleMesaListener.addPlatoOnMesa(mMesa.getIndex());
+                }
+                return true;
+                
+
+        }
+        return superValue;
+    }
+
+    void updateTitle(String newTitle){
+        if (getActivity() instanceof AppCompatActivity) {
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+
+            // 2) Acceder, dentro de la actividad, a la ActionBar
+            android.support.v7.app.ActionBar actionBar = activity.getSupportActionBar();
+
+            // 3) Cambiar el texto a la toolbar
+            actionBar.setTitle(newTitle);
+        }
+
+    }
+/*
     private void seleccionaPlatoDeLaCarta(){
 
         //he de pasarle esta informacion a la actividad, como el delagado y la actividad lanzara el SeleccionaPlatoActivity
@@ -124,9 +166,9 @@ public class DetalleMesaFragment extends Fragment {
         Intent intent = new Intent(this, SeleccionaPlatoActivity.class);
         intent.putExtra(SeleccionaPlatoActivity.EXTRA_MESA, mMesa.getIndex());
         startActivity(intent);
-*/
-    }
 
+    }
+*/
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
