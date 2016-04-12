@@ -2,6 +2,8 @@ package com.nicatec.restaurante.fragment;
 
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -29,6 +31,7 @@ public class DetalleMesaFragment extends Fragment {
 
     private DetalleMesaListener mDetalleMesaListener;
     private ListView list;
+    private MenuItem mMenuItem;
 
 
     public static DetalleMesaFragment newInstance(int position) {
@@ -86,20 +89,35 @@ public class DetalleMesaFragment extends Fragment {
         super.onResume();
         //vuelvo a recargar la tabla, es posible ue haya una forma mejor
         this.list.invalidateViews();
+        if ( mMenuItem != null)
+            mMenuItem.setEnabled(!mMesa.estaVacia());
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.detallemesa, menu);
+
+        mMenuItem = menu.findItem(R.id.dolorosa);
+        mMenuItem.setEnabled(!mMesa.estaVacia());
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean superValue =  super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case R.id.dolorosa:
-                break;
+                //tengo quemostrar un dialog y luego limpiar la mesa
+                DolorosaFragment dolorosaFragment = new DolorosaFragment();
+                Bundle arguments = new Bundle();
+                arguments.putInt(DolorosaFragment.ARG_MESA_DOLOROSA, mMesa.getIndex());
+                dolorosaFragment.setArguments(arguments);
+                dolorosaFragment.setTargetFragment(this, 1);
+                dolorosaFragment.show(getFragmentManager(),null);
+                return true;
             case R.id.addplatocomanda:
                 //tengo que pasar la mesa al detalleActivity para que lance el listado de platos, lo hago usando el listener y el interface
                 if ( mDetalleMesaListener != null) {
@@ -111,6 +129,8 @@ public class DetalleMesaFragment extends Fragment {
         }
         return superValue;
     }
+
+
 
     void updateTitle(String newTitle){
         if (getActivity() instanceof AppCompatActivity) {

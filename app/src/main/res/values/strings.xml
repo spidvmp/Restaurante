@@ -11,4 +11,5 @@
     <string name="listado_platos_title">Listado de Platos</string>
     <string name="dolorosa">La Dolorosa</string>
     <string name="plato_comanda">+ Plato</string>
+    <string name="dolorosa_dialog">Dolorosa</string>
 </resources>
