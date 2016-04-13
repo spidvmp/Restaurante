@@ -2,12 +2,15 @@ package com.nicatec.restaurante.fragment;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -87,10 +90,7 @@ public class DetalleMesaFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        //vuelvo a recargar la tabla, es posible ue haya una forma mejor
-        this.list.invalidateViews();
-        if ( mMenuItem != null)
-            mMenuItem.setEnabled(!mMesa.estaVacia());
+        actualizaLaMesa();
     }
 
 
@@ -111,12 +111,8 @@ public class DetalleMesaFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.dolorosa:
                 //tengo quemostrar un dialog y luego limpiar la mesa
-                DolorosaFragment dolorosaFragment = new DolorosaFragment();
-                Bundle arguments = new Bundle();
-                arguments.putInt(DolorosaFragment.ARG_MESA_DOLOROSA, mMesa.getIndex());
-                dolorosaFragment.setArguments(arguments);
-                dolorosaFragment.setTargetFragment(this, 1);
-                dolorosaFragment.show(getFragmentManager(),null);
+                mostrarCuenta();
+                actualizaLaMesa();
                 return true;
             case R.id.addplatocomanda:
                 //tengo que pasar la mesa al detalleActivity para que lance el listado de platos, lo hago usando el listener y el interface
@@ -145,6 +141,32 @@ public class DetalleMesaFragment extends Fragment {
 
     }
 
+    void mostrarCuenta(){
+        //La mesa esta en el parametro, muestro la cuenta y limpio la mesa
+        float aPagar = mMesa.laDolorosa();
+        String msg = "Total a pagar: " + Float.toString(aPagar) ;
+        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        alert.setTitle("Cuenta");
+        alert.setMessage(msg)
+                .setCancelable(false)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+        AlertDialog a = alert.create();
+        a.show();
+
+    }
+
+    private void actualizaLaMesa(){
+        //recarga la tabla y comprueba el estado enable de laDolorosa
+        //vuelvo a recargar la tabla, es posible ue haya una forma mejor
+        this.list.invalidateViews();
+        if ( mMenuItem != null)
+            mMenuItem.setEnabled(!mMesa.estaVacia());
+    }
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

@@ -42,7 +42,7 @@ public class Mesa {
     public float laDolorosa() {
         //me recorro todos los platos que han pedido, los sumo y devuelvo el valor
         float precio = 0.0f;
-        for (Integer i=0; i<= mPlatos.size(); i++)
+        for (Integer i=0; i< mPlatos.size(); i++)
             //voy sumando los precios
             precio += mPlatos.get(i).getPrecio();
 
