@@ -12,4 +12,6 @@
     <string name="dolorosa">La Dolorosa</string>
     <string name="plato_comanda">+ Plato</string>
     <string name="dolorosa_dialog">Dolorosa</string>
+    <string name="plato_title">Plato</string>
+    <string name="precio_title">Precio</string>
 </resources>

@@ -34,7 +34,7 @@ public class Plato {
     public float getPrecio() {
         return mPrecio;
     }
-    public String getPrecioString() { return String.format("%f€",mPrecio);}
+    public String getPrecioString() { return String.format("%.2f€",mPrecio);}
 
     public String getFoto() {
         return mFoto;
