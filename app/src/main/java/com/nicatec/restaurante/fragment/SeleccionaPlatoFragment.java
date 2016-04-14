@@ -50,7 +50,7 @@ public class SeleccionaPlatoFragment extends Fragment {
         ArrayAdapter<Plato> adapter = new ArrayAdapter<Plato>(getActivity(), android.R.layout.simple_list_item_1, carta.getPlatos());
         list.setAdapter(adapter);
 
-    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             if ( mPlatoListener != null ){
@@ -76,6 +76,8 @@ public class SeleccionaPlatoFragment extends Fragment {
         }
 
     }
+
+
 
     @Override
     public void onAttach(Context context) {

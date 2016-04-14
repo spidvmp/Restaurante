@@ -5,5 +5,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="padding_detalle">16dp</dimen>
     <dimen name="elevation_default">10dp</dimen>
-    <dimen name="margen_plato_detalle">4dp</dimen>
+    <dimen name="margen_plato_detalle">8dp</dimen>
+    <dimen name="img_dimension">120dp</dimen>
+    <dimen name="plato_detalle_top_margen">60dp</dimen>
 </resources>

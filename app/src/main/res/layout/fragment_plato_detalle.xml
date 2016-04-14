@@ -6,19 +6,22 @@
 
     <LinearLayout
         android:orientation="vertical"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="@dimen/plato_detalle_top_margen"
             android:gravity="center_horizontal">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="@dimen/img_dimension"
+                android:layout_height="@dimen/img_dimension"
                 android:layout_alignParentLeft="true"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margen_plato_detalle"
                 android:id="@+id/imageView" />
 
             <LinearLayout

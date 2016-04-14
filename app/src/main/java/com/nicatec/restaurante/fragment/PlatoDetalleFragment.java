@@ -70,6 +70,7 @@ public class PlatoDetalleFragment extends Fragment {
 
         nombre.setText(mPlato.getNombre());
         precio.setText(mPlato.getPrecioString());
+        photo.setImageBitmap(mPlato.getPic());
 
 
         return root;

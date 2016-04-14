@@ -81,31 +81,6 @@ public class Carta {
             }
             Log.v("DOWNLOAD", String.format("downloaded sb=", sb.toString()));
             //lo que recibo es un array de platos
-            /*
-            String a = "[\n" +
-                    "{\n" +
-                    "\"name\":\"Al Mondigas\",\n" +
-                    "\"pvp\":\"12.95\",\n" +
-                    "\"allergies\":[{\"a\":\"huevo\"}],\n" +
-                    "\"photo\":\"albondigas.jpg\",\n" +
-                    "\"comment\":\"Un plato redondito redondito para comer o jugar a las canicas\"\n" +
-                    "},\n" +
-                    "{\n" +
-                    "\"name\":\"Flan\",\n" +
-                    "\"pvp\":\"5.95\",\n" +
-                    "\"allergies\":[{\"a\":\"huevo\"}],\n" +
-                    "\"photo\":\"flan.jpg\",\n" +
-                    "\"comment\":\"Un postre delicioso\"\n" +
-                    "},\n" +
-                    "{\n" +
-                    "\"name\":\"Mac Arrones\",\n" +
-                    "\"pvp\":\"7.50\",\n" +
-                    "\"allergies\":[{\"a\":\"chorizo\"},{\"a\":\"gluten\"}],\n" +
-                    "\"photo\":\"macarrones.jpg\",\n" +
-                    "\"comment\":\"Comete un buen plato de estos, con o sin politicos\"\n" +
-                    "}\n" +
-                    "]";
-             */
             JSONArray platosJSONArray = new JSONArray(sb.toString());
             //JSONArray platosJSONArray = new JSONArray(a);
             //me recorro el array
