@@ -7,16 +7,9 @@
 "comment":"Un plato redondito redondito para comer o jugar a las canicas"
 },
 {
-"name":"Flan",
-"pvp":"5.95",
-"allergies":[{"a":"huevo"}],
-"photo":"flan.jpg",
-"comment":"Un postre delicioso"
-},
-{
 "name":"Mac Arrones",
 "pvp":"7.50",
-"allergies":[{"a":"chorizo"},{"a":"gluten"}],
+"allergies":[{"a":"huevo"},{"a":"gluten"}],
 "photo":"macarrones.jpg",
 "comment":"Comete un buen plato de estos, con o sin politicos"
 },
@@ -28,18 +21,11 @@
 "comment":"Deliciosas cocretas de la abulita hechas a mano con jamon 10J y 4K"
 },
 {
-"name":"Tirame el Zu",
-"pvp":"6.4",
-"allergies":[],
-"photo":"tiramisu.jpg",
-"commnet":"Deliciosos postre hecho con queso mascarpone"
-},
-{
 "name":"Estofado de ternera",
 "pvp":"20.00",
 "allergies":[],
 "photo":"estofado.jpg",
-"comment":"Estofado de ternera similar al que salen en todas las peliculas del oeste cuando llegan a una casa y hay una dama"
+"comment":"Estofado :de ternera similar al que salen en todas las peliculas del oeste cuando llegan a una casa y hay una dama"
 },
 {
 "name":"Col y flor",
@@ -49,11 +35,24 @@
 "comment":"Alimento sanisimo que les encanta a los niños, te comes 2 cosas una col y una flor"
 },
 {
+"name":"Flan",
+"pvp":"5.95",
+"allergies":[{"a":"huevo"}],
+"photo":"flan.jpg",
+"comment":"Un postre delicioso"
+},
+{
+"name":"Tirame el Zu",
+"pvp":"6.4",
+"allergies":[{"a":"gluten"}],
+"photo":"tiramisu.jpg",
+"comment":"Deliciosos postre hecho con queso mascarpone"
+},
+{
 "name":"Papaya",
 "pvp":"5.95",
 "allergies":[],
 "photo":"papaya.jpg",
-"comment":"Recientraida de la casa de julio Iglesias"
+"comment":"Recien traida de la casa de julio Iglesias"
 }
-
 ]

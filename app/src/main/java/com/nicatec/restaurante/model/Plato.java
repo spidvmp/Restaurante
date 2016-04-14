@@ -23,9 +23,7 @@ public class Plato {
     private float mPrecio = 0.0f;
     private String mFotoURL = null;
     private Bitmap mPic = null;
-
-
-
+    private String mCamarero = null; //especificaciones que incluye el camarero
     private String mComentario = null;
     private LinkedList<String> mAlergias = null;
 
@@ -34,6 +32,7 @@ public class Plato {
         this.mPrecio = precio;
         this.mFotoURL = foto;
         this.mComentario = comentario;
+
         //Las variantes se modificaran en el pedio, asi que se inicializa en blanco
         this.mAlergias = new LinkedList<String>();
     }
@@ -83,8 +82,15 @@ public class Plato {
         return mComentario;
     }
 
-    public void setComentario(String mComentario) {
-        this.mComentario = mComentario;
+    public void setComentario(String comentario) {
+        this.mComentario = comentario;
+    }
+    public String getCamarero() {
+        return mCamarero;
+    }
+
+    public void setCamarero(String camarero) {
+        this.mCamarero = camarero;
     }
 
 

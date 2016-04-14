@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.view.MenuItem;
 
 import com.nicatec.restaurante.R;
@@ -61,13 +62,14 @@ public class PlatoDetalleActivity extends AppCompatActivity implements PlatoDeta
 
 
     @Override
-    public void addPlatoALaMesa(int position) {
+    public void addPlatoALaMesa(int position,String comentario) {
         //estoy en una mesa y han seleccionado que quieren añadir un plato, me pasan el indice de la mesa donde añadir
         //he de pasarlo al SeleccionaPlatoActivity, para que añada el plato a la mesa
         //Log.v("PLATODETALLEACTIVITY", "Recibo el plato a añadir");
         //mPlatoDetalleListener.addEnLaMesaElPlato(position);
         Intent returnIntent = new Intent();
         returnIntent.putExtra(SeleccionaPlatoActivity.EXTRA_PLATO_SELECCIONADO, position);
+        returnIntent.putExtra(SeleccionaPlatoActivity.EXTRA_COMENTARIO_CAMARERO, comentario);
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
 

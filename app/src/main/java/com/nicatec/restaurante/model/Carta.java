@@ -21,7 +21,7 @@ public class Carta {
     //genero un singleton con todos los platos que tengo
     private static Carta sInstance = null;
     private LinkedList<Plato> mCarta = null;
-    private static final String restauranteURL = "http://www.mocky.io/v2/5707f5ff1100002523e9465a";
+    private static final String restauranteURL = "http://www.mocky.io/v2/570f82b5250000c51d29c77e";
 
 
     public static Carta getsInstance() {

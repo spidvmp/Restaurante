@@ -24,6 +24,7 @@ y se lo añado a la mesa que ya tengo
 public class SeleccionaPlatoActivity extends AppCompatActivity implements  SeleccionaPlatoFragment.SelectPlatoListener {
     public static final String EXTRA_MESA = "EXTRA_MESA";
     public static final String EXTRA_PLATO_SELECCIONADO = "EXTRA_PLATO_SELECCIONADO";
+    public static final String EXTRA_COMENTARIO_CAMARERO = "EXTRA_COMENTARIO_CAMARERO";
     static final int PLATO_SELECCIONADO = 1;
 
     //me pasan el indice de la mesa desde donde han seleccionado nuevo plato,
@@ -87,6 +88,8 @@ public class SeleccionaPlatoActivity extends AppCompatActivity implements  Selec
                 //tenemos los datos corrector, los saco de data
                 int platoIndex = data.getIntExtra(EXTRA_PLATO_SELECCIONADO,0);
                 Plato plato = Carta.getsInstance().getPlato(platoIndex);
+                //al plato seleccionado le añado el comentario del camarero
+                plato.setCamarero(data.getStringExtra(EXTRA_COMENTARIO_CAMARERO));
                 //he de añadir el plato a la mesa
                 Mesa mesa = Mesas.getInstance().getMesa(mMesaIndex);
 

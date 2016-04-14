@@ -6,18 +6,18 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nicatec.restaurante.R;
 import com.nicatec.restaurante.model.Carta;
 import com.nicatec.restaurante.model.Plato;
-
-import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,14 +60,17 @@ public class PlatoDetalleFragment extends Fragment {
         TextView nombre = (TextView) root.findViewById(R.id.nombre);
         TextView precio = (TextView) root.findViewById(R.id.precio);
         TextView comentario = (TextView) root.findViewById(R.id.comentario);
+        final EditText camarero = ( EditText) root.findViewById(R.id.camarero);
 
         Button add_plato = (Button) root.findViewById(R.id.add_button);
         add_plato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //hay que añadir el plato. La actividad tiene la mesa y aqui le paso el plato
-                if ( mPlatoDetalleListener != null )
-                    mPlatoDetalleListener.addPlatoALaMesa(getArguments().getInt(ARG_PLATO_INDEX));
+                //hay que añadir el plato. La actividad tiene la mesa y aqui le paso el plato y el comentario del camarero, si lo hubiera puesto
+                if ( mPlatoDetalleListener != null ) {
+                    String c = camarero.getText().toString();
+                    mPlatoDetalleListener.addPlatoALaMesa(getArguments().getInt(ARG_PLATO_INDEX), c);
+                }
             }
         });
 
@@ -75,6 +78,9 @@ public class PlatoDetalleFragment extends Fragment {
         precio.setText(mPlato.getPrecioString());
         photo.setImageBitmap(mPlato.getPic());
         comentario.setText(mPlato.getComentario());
+        if ( mPlato.getCamarero() != null) {
+            camarero.setText(mPlato.getCamarero());
+        }
 
 
         return root;
@@ -115,7 +121,7 @@ public class PlatoDetalleFragment extends Fragment {
     }
 
     public interface  PlatoDetalleListener {
-        void addPlatoALaMesa(int position);
+        void addPlatoALaMesa(int position, String text);
 
     }
 }
