@@ -100,7 +100,7 @@ public class Carta {
                 comentario = jsonplato.getString("comment");
 
                 //creo el plato
-                Plato p = new Plato(nombre,precio,foto);
+                Plato p = new Plato(nombre,precio,foto,comentario);
                 //para las alergias, he de sacar un objeto que es un array
                 JSONArray jsonAlergias = jsonplato.getJSONArray("allergies");
                 for (int indexA = 0; indexA < jsonAlergias.length(); indexA++) {

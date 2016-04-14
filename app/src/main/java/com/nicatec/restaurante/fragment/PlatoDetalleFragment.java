@@ -17,6 +17,8 @@ import com.nicatec.restaurante.R;
 import com.nicatec.restaurante.model.Carta;
 import com.nicatec.restaurante.model.Plato;
 
+import org.w3c.dom.Text;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -57,6 +59,7 @@ public class PlatoDetalleFragment extends Fragment {
         ImageView photo = (ImageView) root.findViewById(R.id.imageView);
         TextView nombre = (TextView) root.findViewById(R.id.nombre);
         TextView precio = (TextView) root.findViewById(R.id.precio);
+        TextView comentario = (TextView) root.findViewById(R.id.comentario);
 
         Button add_plato = (Button) root.findViewById(R.id.add_button);
         add_plato.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +74,7 @@ public class PlatoDetalleFragment extends Fragment {
         nombre.setText(mPlato.getNombre());
         precio.setText(mPlato.getPrecioString());
         photo.setImageBitmap(mPlato.getPic());
+        comentario.setText(mPlato.getComentario());
 
 
         return root;

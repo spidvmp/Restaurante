@@ -53,6 +53,11 @@
             </LinearLayout>
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/comentario"
+            android:layout_margin="@dimen/margen_plato_detalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <Button
             android:id="@+id/add_button"
             android:gravity="center"
