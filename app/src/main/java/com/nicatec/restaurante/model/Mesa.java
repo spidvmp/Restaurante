@@ -67,7 +67,7 @@ public class Mesa {
         return mLaMesaEstaVacia;
     }
 
-    public void setmLaMesaEstaVacia(Boolean mLaMesaEstaVacia) {
+    public void setLaMesaEstaVacia(Boolean mLaMesaEstaVacia) {
         this.mLaMesaEstaVacia = mLaMesaEstaVacia;
     }
 

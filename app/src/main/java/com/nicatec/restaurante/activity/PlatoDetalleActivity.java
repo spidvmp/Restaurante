@@ -21,6 +21,7 @@ DE cualquier otra forma, se muestra la opcion de poner los comentarios del camar
 public class PlatoDetalleActivity extends AppCompatActivity implements PlatoDetalleFragment.PlatoDetalleListener{
 
     public static final String EXTRA_PLATO_INDEX = "EXTRA_PLATO";
+    public static final String EXTRA_MESA_INDEX = "EXTRA_MESA";
 
 
     @Override
@@ -37,9 +38,11 @@ public class PlatoDetalleActivity extends AppCompatActivity implements PlatoDeta
         if ( fm.findFragmentById(R.id.fragment_plato_detalle) == null) {
 
             //extraigo el parametro que me han pasado, se lo paso al fragment para que saque el plato que tiene que mostrar
-            int index = getIntent().getIntExtra(EXTRA_PLATO_INDEX, 0);
+            int indexPlato = getIntent().getIntExtra(EXTRA_PLATO_INDEX, 0);
+            //Saco el parametro de la mesa, puede que no llegue nada, eso significa que es uno nuevo, si llega algo es que estan editando el plato de una mesa
+            int indexMesa = getIntent().getIntExtra(EXTRA_MESA_INDEX, -1);
             fm.beginTransaction()
-                    .add(R.id.fragment_plato_detalle, PlatoDetalleFragment.newInstance(index))
+                    .add(R.id.fragment_plato_detalle, PlatoDetalleFragment.newInstance(indexPlato, indexMesa))
                     .commit();
 
         }
@@ -65,8 +68,6 @@ public class PlatoDetalleActivity extends AppCompatActivity implements PlatoDeta
     public void addPlatoALaMesa(int position,String comentario) {
         //estoy en una mesa y han seleccionado que quieren añadir un plato, me pasan el indice de la mesa donde añadir
         //he de pasarlo al SeleccionaPlatoActivity, para que añada el plato a la mesa
-        //Log.v("PLATODETALLEACTIVITY", "Recibo el plato a añadir");
-        //mPlatoDetalleListener.addEnLaMesaElPlato(position);
         Intent returnIntent = new Intent();
         returnIntent.putExtra(SeleccionaPlatoActivity.EXTRA_PLATO_SELECCIONADO, position);
         returnIntent.putExtra(SeleccionaPlatoActivity.EXTRA_COMENTARIO_CAMARERO, comentario);
@@ -74,6 +75,11 @@ public class PlatoDetalleActivity extends AppCompatActivity implements PlatoDeta
         finish();
 
 
+    }
+
+    @Override
+    public void termine() {
+        finish();
     }
 
 }

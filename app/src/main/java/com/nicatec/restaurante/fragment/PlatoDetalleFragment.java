@@ -6,7 +6,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,8 @@ import android.widget.TextView;
 
 import com.nicatec.restaurante.R;
 import com.nicatec.restaurante.model.Carta;
+import com.nicatec.restaurante.model.Mesa;
+import com.nicatec.restaurante.model.Mesas;
 import com.nicatec.restaurante.model.Plato;
 
 /**
@@ -25,12 +26,16 @@ import com.nicatec.restaurante.model.Plato;
 public class PlatoDetalleFragment extends Fragment {
 
     private static final String ARG_PLATO_INDEX = "ARG_PLATO_INDEX";
+    private static final String ARG_MESA_INDEX = "ARG_MESA_INDEX";
     private static Plato mPlato;
+    //esta opcion de la mesa es para cuando se edita un plato de la mesa
+    private static Mesa mMesa = null;
     private PlatoDetalleListener mPlatoDetalleListener;
 
-    public static PlatoDetalleFragment newInstance(int position){
+    public static PlatoDetalleFragment newInstance(int positionPlato, int positionMesa){
         Bundle arguments = new Bundle();
-        arguments.putInt(ARG_PLATO_INDEX, position);
+        arguments.putInt(ARG_PLATO_INDEX, positionPlato);
+        arguments.putInt(ARG_MESA_INDEX, positionMesa);
         PlatoDetalleFragment fragment = new PlatoDetalleFragment();
         fragment.setArguments(arguments);
         return fragment;
@@ -45,7 +50,15 @@ public class PlatoDetalleFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if ( getArguments() != null ){
-            mPlato = Carta.getsInstance().getPlato(getArguments().getInt(ARG_PLATO_INDEX));
+            if ( getArguments().getInt(ARG_MESA_INDEX) == -1) {
+                //si parametro de mesa es -1, es que es un plato nuevo
+                mPlato = Carta.getsInstance().getPlato(getArguments().getInt(ARG_PLATO_INDEX));
+
+            } else {
+                //tenemos valor en mesa, eso significa que se esta editanfo, asi que el plato no sale del singleton, sino del array que tiene la mesaç
+                mMesa = Mesas.getInstance().getMesa(getArguments().getInt(ARG_MESA_INDEX));
+                mPlato = mMesa.getPlatos().get(getArguments().getInt(ARG_PLATO_INDEX));
+            }
             updateTitle(mPlato.toString());
         }
     }
@@ -63,13 +76,30 @@ public class PlatoDetalleFragment extends Fragment {
         final EditText camarero = ( EditText) root.findViewById(R.id.camarero);
 
         Button add_plato = (Button) root.findViewById(R.id.add_button);
+        //si se esta editando cambio el texto del boton
+        if ( mMesa != null ){
+            add_plato.setText("Modificar");
+        }
         add_plato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //hay que añadir el plato. La actividad tiene la mesa y aqui le paso el plato y el comentario del camarero, si lo hubiera puesto
-                if ( mPlatoDetalleListener != null ) {
+                if (mPlatoDetalleListener != null) {
                     String c = camarero.getText().toString();
-                    mPlatoDetalleListener.addPlatoALaMesa(getArguments().getInt(ARG_PLATO_INDEX), c);
+
+                    //en el caso de que la mesa sea null, significa que añado un plato a la mesa
+                    if ( mMesa == null) {
+                        mPlatoDetalleListener.addPlatoALaMesa(getArguments().getInt(ARG_PLATO_INDEX), c);
+                    } else {
+                        //estamos editando, lo unico que se modifica es el comentario del camarero
+                        //modifico el valor del comentario del camarero
+                        mPlato.setCamarero(c);
+                        //cambio el plato de la mesa por esta actualizacion
+                        mMesa.getPlatos().set(getArguments().getInt(ARG_PLATO_INDEX), mPlato);
+                        Mesas.getInstance().getMesas().set(getArguments().getInt(ARG_MESA_INDEX), mMesa);
+                        //le paso a mi atividadque he terminado, que salga sin hacer nada xq ya lo hice yo
+                        mPlatoDetalleListener.termine();
+                    }
                 }
             }
         });
@@ -122,6 +152,7 @@ public class PlatoDetalleFragment extends Fragment {
 
     public interface  PlatoDetalleListener {
         void addPlatoALaMesa(int position, String text);
+        void termine();
 
     }
 }

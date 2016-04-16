@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -30,6 +31,7 @@ import com.nicatec.restaurante.model.Plato;
  */
 public class DetalleMesaFragment extends Fragment {
     private static final String ARG_MESA_INDEX = "ARG_MESA_INDEX";
+    private static final String ARG_PLATO_DE_LA_MESA_INDEX = "ARG_PLATO_DE_LA_MESA_INDEX";
     private static Mesa mMesa;
 
     private DetalleMesaListener mDetalleMesaListener;
@@ -37,10 +39,15 @@ public class DetalleMesaFragment extends Fragment {
     private MenuItem mMenuItem;
 
 
-    public static DetalleMesaFragment newInstance(int position) {
+    public static DetalleMesaFragment newInstance(int position, int posicionPlato) {
+        //me pasan la posicion dela mesa y la posicion del plato. La posicion del plato podria ser -1, eso significa que el plato que se saca
+        //es del sibgleton de los platos y sera añadir un plato a la mesa, si viene con dato, entonces estan editando una mesa y un plato
+        //asi que hayq eu sacarlo de la mesa(posicion).plato(posicionPlato) y no se añadira nada, solo se modificara el comentario del camarero
         //esto devuelve un DEtallemesafragment y ha recibido un paramtro
         Bundle arguments = new Bundle();
         arguments.putInt(ARG_MESA_INDEX, position);
+        if ( posicionPlato >= 0)
+            arguments.putInt(ARG_PLATO_DE_LA_MESA_INDEX, posicionPlato);
 
         DetalleMesaFragment fragment = new DetalleMesaFragment();
         fragment.setArguments(arguments);
@@ -80,9 +87,19 @@ public class DetalleMesaFragment extends Fragment {
         //creamos un adaptador para darselo a la lista y que sepa que datos mostrar
         //le tengo que meter el array que esta dentro de la mesa pedida
         ArrayAdapter<Plato> adapter = new ArrayAdapter<Plato>(getActivity(), android.R.layout.simple_list_item_1,mMesa.getPlatos());
-
         //le asignamos el adaptador a la vista;
         list.setAdapter(adapter);
+
+        //le asignamos un listener a la tabla, si pulsan sobre unplato de l amesa se va a PlatoDEtalleActivity y muestra el plato, el camaeo podra añadir cosas
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if ( mDetalleMesaListener != null )
+                    mDetalleMesaListener.editPlatoDeLaMesa(mMesa.getIndex(), position);
+            }
+        });
+
+
         return root;
     }
 
@@ -116,8 +133,9 @@ public class DetalleMesaFragment extends Fragment {
                 return true;
             case R.id.addplatocomanda:
                 //tengo que pasar la mesa al detalleActivity para que lance el listado de platos, lo hago usando el listener y el interface
+                //paso tambien el plato si lo estuvieramos editando, como es uno nuevo le paso -1
                 if ( mDetalleMesaListener != null) {
-                    mDetalleMesaListener.addPlatoOnMesa(mMesa.getIndex());
+                    mDetalleMesaListener.addPlatoOnMesa(mMesa.getIndex(),-1);
                 }
                 return true;
 
@@ -189,6 +207,8 @@ public class DetalleMesaFragment extends Fragment {
     }
     public interface DetalleMesaListener {
         //si pulsan sobre el boton de add, he de sacar la lista de los platos para añadir en una mesa, paso el indice de la mesa
-        void addPlatoOnMesa(int  mesaIndex);
+        void addPlatoOnMesa(int  mesaIndex, int platoIndex);
+        //si han pulsado sobre unplato, edito el plato de la mesa
+        void editPlatoDeLaMesa(int indexMesa, int indexPlato);
     }
 }
