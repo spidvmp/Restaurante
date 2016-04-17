@@ -66,6 +66,13 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/alergiasIcons"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp">
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/comentario"

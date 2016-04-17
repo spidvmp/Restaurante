@@ -1,6 +1,7 @@
 package com.nicatec.restaurante.fragment;
 
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -9,9 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.nicatec.restaurante.R;
@@ -112,6 +115,35 @@ public class PlatoDetalleFragment extends Fragment {
             camarero.setText(mPlato.getCamarero());
         }
 
+        //hago un linear layout para poner los icono de las alergias
+        //conpruebo si tengo alergias
+        if ( mPlato.alergiasCount() > 0) {
+            LinearLayout linearLayout = (LinearLayout) root.findViewById(R.id.alergiasIcons);
+
+            for (int i = 0; i < mPlato.alergiasCount(); i++) {
+                //saco la alergia que es
+                String a = mPlato.getAlergiaAtIndex(i);
+                //creo las vistas e inserto en el layout
+                ImageView imageView = new ImageView(root.getContext());
+                //imageView.setLayoutParams(new WindowManager.LayoutParams(new LayoutParams(LayoutParams."48dp"))
+                //imagino que esto se podra generar automaticamente, pero de momento con el switch
+                switch (a){
+                    case "gluten":
+                        imageView.setImageResource(R.drawable.gluten);
+                        break;
+                    case "huevo":
+                        imageView.setImageResource(R.drawable.huevo);
+                        break;
+                }
+
+                linearLayout.addView(imageView);
+            }
+
+
+
+
+
+        }
 
         return root;
     }

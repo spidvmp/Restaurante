@@ -36,7 +36,7 @@ public class Plato {
         //Las variantes se modificaran en el pedio, asi que se inicializa en blanco
         this.mAlergias = new LinkedList<String>();
 
-        //no queri aponer esto aqui, sino que se baje solo cuando haga falta, pero no se como refrescar la imagen una vez se haya bajado
+        //no queria poner esto aqui, sino que se baje solo cuando haga falta, pero no se como refrescar la imagen una vez se haya bajado
         getBitmapFromURL(getFotoURL());
     }
 
@@ -80,6 +80,8 @@ public class Plato {
     public LinkedList<String> getAlergias() {
         return mAlergias;
     }
+    public int alergiasCount() { return mAlergias.size(); }
+    public String getAlergiaAtIndex(int index) { return mAlergias.get(index); }
 
     public String getComentario() {
         return mComentario;
