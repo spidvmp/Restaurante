@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.nicatec.restaurante.R;
@@ -116,11 +117,13 @@ public class SeleccionaPlatoActivity extends AppCompatActivity implements  Selec
 
     @Override
     public void addPlatoALaMesa(int position, String text) {
+        Log.v("SELECCIONAPLATOACT", "añaden plato a la mesa");
 
     }
 
     @Override
     public void termine() {
+        Log.v("SELECCTIONAPLATOACT","termina");
 
     }
 }

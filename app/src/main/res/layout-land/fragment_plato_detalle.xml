@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:padding="@dimen/activity_horizontal_margin" >
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        app:cardCornerRadius = "10dp"
+        android:padding="10dp"
+        app:cardElevation = "10dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:background="@color/cardBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="left">
+
+                <ImageView
+                    android:layout_width="@dimen/img_dimension"
+                    android:layout_height="@dimen/img_dimension"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margen_plato_detalle"
+                    android:id="@+id/imageView" />
+
+                <LinearLayout
+                    android:layout_alignTop="@id/imageView"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="@string/plato_title"
+                        android:layout_marginBottom="@dimen/margen_plato_detalle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/nombre"
+                        android:layout_marginBottom="@dimen/margen_plato_detalle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:text="@string/precio_title"
+                        android:layout_marginBottom="@dimen/margen_plato_detalle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/precio"
+                        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/alergiasIcons"
+                    android:orientation="vertical"
+                    android:layout_width="55dp"
+                    android:layout_height="120dp">
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/comentario"
+                    android:layout_margin="@dimen/margen_plato_detalle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+
+
+
+            <EditText
+                android:id="@+id/camarero"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/add_button"
+                android:layout_gravity="center"
+                android:text="Incluir comanda"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
