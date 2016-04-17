@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.nicatec.restaurante.R;
+import com.nicatec.restaurante.fragment.PlatoDetalleFragment;
 import com.nicatec.restaurante.fragment.SeleccionaPlatoFragment;
 import com.nicatec.restaurante.model.Carta;
 import com.nicatec.restaurante.model.Mesa;
@@ -44,10 +45,23 @@ public class SeleccionaPlatoActivity extends AppCompatActivity implements  Selec
         mMesaIndex = getIntent().getIntExtra(EXTRA_MESA,0);
 
         FragmentManager fm = getFragmentManager();
+        //selecciona plato siempre tiene que aparecer, asi que no comprobamos si existe, so si ya esta creado
         if ( fm.findFragmentById(R.id.fragment_selecciona_plato) == null){
             fm.beginTransaction()
                     .add(R.id.fragment_selecciona_plato, new SeleccionaPlatoFragment())
                     .commit();
+
+        }
+        //comprobamos si tenemos hueco para el  platoDetalle
+        if ( findViewById(R.id.fragment_plato_detalle) != null ){
+            //tenemos el fragment de l platodetalle, es una tablet, comprobamos si ya esta cargado
+            if ( fm.findFragmentById(R.id.fragment_plato_detalle) == null) {
+                //no lo esta, lo cargo
+                fm.beginTransaction()
+                        .add(R.id.fragment_plato_detalle, PlatoDetalleFragment.newInstance(0,mMesaIndex))
+                        .commit();
+            }
+
 
         }
 
