@@ -22,7 +22,7 @@ Me pasan la mesas desde donde se ha solicitado añadir un plato, y si selecciona
 y se lo añado a la mesa que ya tengo
  */
 
-public class SeleccionaPlatoActivity extends AppCompatActivity implements  SeleccionaPlatoFragment.SelectPlatoListener {
+public class SeleccionaPlatoActivity extends AppCompatActivity implements  SeleccionaPlatoFragment.SelectPlatoListener, PlatoDetalleFragment.PlatoDetalleListener {
     public static final String EXTRA_MESA = "EXTRA_MESA";
     public static final String EXTRA_PLATO_SELECCIONADO = "EXTRA_PLATO_SELECCIONADO";
     public static final String EXTRA_COMENTARIO_CAMARERO = "EXTRA_COMENTARIO_CAMARERO";
@@ -56,9 +56,9 @@ public class SeleccionaPlatoActivity extends AppCompatActivity implements  Selec
         if ( findViewById(R.id.fragment_plato_detalle) != null ){
             //tenemos el fragment de l platodetalle, es una tablet, comprobamos si ya esta cargado
             if ( fm.findFragmentById(R.id.fragment_plato_detalle) == null) {
-                //no lo esta, lo cargo
+                //no lo esta, lo cargo y hay que tomarlo como plato nuevo, asi que no le paso la mesa
                 fm.beginTransaction()
-                        .add(R.id.fragment_plato_detalle, PlatoDetalleFragment.newInstance(0,mMesaIndex))
+                        .add(R.id.fragment_plato_detalle, PlatoDetalleFragment.newInstance(0,-1))
                         .commit();
             }
 
@@ -114,4 +114,13 @@ public class SeleccionaPlatoActivity extends AppCompatActivity implements  Selec
         }
     }
 
+    @Override
+    public void addPlatoALaMesa(int position, String text) {
+
+    }
+
+    @Override
+    public void termine() {
+
+    }
 }
