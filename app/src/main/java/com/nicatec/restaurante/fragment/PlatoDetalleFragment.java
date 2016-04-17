@@ -125,8 +125,7 @@ public class PlatoDetalleFragment extends Fragment {
                 String a = mPlato.getAlergiaAtIndex(i);
                 //creo las vistas e inserto en el layout
                 ImageView imageView = new ImageView(root.getContext());
-                //imageView.setLayoutParams(new WindowManager.LayoutParams(new LayoutParams(LayoutParams."48dp"))
-                //imagino que esto se podra generar automaticamente, pero de momento con el switch
+                //imagino que esto se podra generar automaticamente o hacer de una menera mejor, pero de momento con el switch
                 switch (a){
                     case "gluten":
                         imageView.setImageResource(R.drawable.gluten);
