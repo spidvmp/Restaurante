@@ -82,6 +82,7 @@ public class SeleccionaPlatoActivity extends AppCompatActivity implements  Selec
         return superValue;
     }
 
+
     @Override
     public void onPlatoSelected(int position) {
         //han selecionado un plato, llega del fragment. Lo mando a la  actividad PlatoDEtalleActivity, para que muestre el detalle del plato
@@ -116,8 +117,27 @@ public class SeleccionaPlatoActivity extends AppCompatActivity implements  Selec
     }
 
     @Override
-    public void addPlatoALaMesa(int position, String text) {
+    public void addPlatoALaMesa(int position, String comentario) {
         Log.v("SELECCIONAPLATOACT", "añaden plato a la mesa");
+
+        if ( position >= 0 && position <= Carta.getsInstance().getCartaCount()){
+            //saco el plato que me han pasado
+            Plato plato = Carta.getsInstance().getPlato(position);
+            if ( comentario != null ){
+                plato.setCamarero(comentario);
+            }
+
+            Mesa mesa = Mesas.getInstance().getMesa(mMesaIndex);
+            mesa.addPlato(plato);
+        }
+
+        /*
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra(SeleccionaPlatoActivity.EXTRA_PLATO_SELECCIONADO, position);
+        returnIntent.putExtra(SeleccionaPlatoActivity.EXTRA_COMENTARIO_CAMARERO, comentario);
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
+        */
 
     }
 
