@@ -95,7 +95,7 @@ public class SeleccionaPlatoActivity extends AppCompatActivity implements  Selec
         //si es distinto de null es que tenemos una referencia
         if ( platoDetalleFragment != null) {
             //hay que decirle al fragment que cambie de plato
-            platoDetalleFragment.muestraPlatoDeLaMesa(position, -1);
+            platoDetalleFragment.cambianPlatoDeLaSeleccion(position, -1);
 
         } else {
             //saco la pantall del detalle del plato, donde apaece toda la informacion

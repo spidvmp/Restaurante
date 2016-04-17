@@ -30,6 +30,9 @@ public class PlatoDetalleFragment extends Fragment {
     private static final String ARG_PLATO_INDEX = "ARG_PLATO_INDEX";
     private static final String ARG_MESA_INDEX = "ARG_MESA_INDEX";
     private static Plato mPlato;
+    //me tengo que guardar el indice del plato, sino en la tablet no funciona
+    //es un parche de ultima hora, mi cabeza ya no da mas de si, asi que no estara muy ortodoxo
+    private static int mPlatoIndex;
     //esta opcion de la mesa es para cuando se edita un plato de la mesa
     private static Mesa mMesa = null;
     private PlatoDetalleListener mPlatoDetalleListener;
@@ -62,7 +65,9 @@ public class PlatoDetalleFragment extends Fragment {
         if ( getArguments() != null ){
             if ( getArguments().getInt(ARG_MESA_INDEX) == -1) {
                 //si parametro de mesa es -1, es que es un plato nuevo
-                mPlato = Carta.getsInstance().getPlato(getArguments().getInt(ARG_PLATO_INDEX));
+                mPlatoIndex = getArguments().getInt(ARG_PLATO_INDEX);
+                mPlato = Carta.getsInstance().getPlato(mPlatoIndex);
+
 
             } else {
                 //tenemos valor en mesa, eso significa que se esta editanfo, asi que el plato no sale del singleton, sino del array que tiene la mesaç
@@ -100,7 +105,7 @@ public class PlatoDetalleFragment extends Fragment {
 
                     //en el caso de que la mesa sea null, significa que añado un plato a la mesa
                     if ( mMesa == null) {
-                        mPlatoDetalleListener.addPlatoALaMesa(getArguments().getInt(ARG_PLATO_INDEX), c);
+                        mPlatoDetalleListener.addPlatoALaMesa(mPlatoIndex, c);
                     } else {
                         //estamos editando, lo unico que se modifica es el comentario del camarero
                         //modifico el valor del comentario del camarero
@@ -165,10 +170,11 @@ public class PlatoDetalleFragment extends Fragment {
         }
 
     }
-    public void muestraPlatoDeLaMesa(int platoIndex, int mesaIndex){
+    public void cambianPlatoDeLaSeleccion(int platoIndex, int mesaIndex){
         //me pasan un plato y puede que una mesa, si viene con mesa saco el plato de ahi, si es -1 lo saco de la carta
         if ( mesaIndex == -1) {
             mPlato = Carta.getsInstance().getPlato(platoIndex);
+            mPlatoIndex = platoIndex;
         } else {
             mMesa = Mesas.getInstance().getMesa(mesaIndex);
             mPlato = mMesa.getPlatos().get(platoIndex);
@@ -208,7 +214,7 @@ public class PlatoDetalleFragment extends Fragment {
                 mLinearLayout.addView(imageView);
             }
         }
-
+        updateTitle(mPlato.toString());
     }
 
     @Override
