@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -140,6 +141,7 @@ public class SeleccionaPlatoActivity extends AppCompatActivity implements  Selec
             Mesa mesa = Mesas.getInstance().getMesa(mMesaIndex);
             mesa.addPlato(plato);
             //saco un mensajito de que se ha incluido el plato
+            Snackbar.make(findViewById(android.R.id.content),"Incluido el plato a la comanda",Snackbar.LENGTH_LONG).show();
         }
 
         /*
