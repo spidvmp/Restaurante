@@ -85,13 +85,23 @@ public class SeleccionaPlatoActivity extends AppCompatActivity implements  Selec
 
     @Override
     public void onPlatoSelected(int position) {
-        //han selecionado un plato, llega del fragment. Lo mando a la  actividad PlatoDEtalleActivity, para que muestre el detalle del plato
+        //han selecionado un plato, llega del fragment. Compruebo si estoy en una tablet o no para mandar info a ina actividad o a un fragment
 
-        //saco la pantall del detalle del plato, donde apaece toda la informacion
-        Intent intent = new Intent(this, PlatoDetalleActivity.class);
-        intent.putExtra(PlatoDetalleActivity.EXTRA_PLATO_INDEX, position);
-        startActivityForResult(intent, PLATO_SELECCIONADO);
 
+        //comprobamos si tenemos el fragment_plato _detalle en la actividad
+        FragmentManager fm = getFragmentManager();
+        PlatoDetalleFragment platoDetalleFragment = (PlatoDetalleFragment) fm.findFragmentById(R.id.fragment_plato_detalle);
+        //si es distinto de null es que tenemos una referencia
+        if ( platoDetalleFragment != null) {
+            //hay que decirle al fragment que cambie de plato
+            platoDetalleFragment.muestraPlatoDeLaMesa(position, -1);
+
+        } else {
+            //saco la pantall del detalle del plato, donde apaece toda la informacion
+            Intent intent = new Intent(this, PlatoDetalleActivity.class);
+            intent.putExtra(PlatoDetalleActivity.EXTRA_PLATO_INDEX, position);
+            startActivityForResult(intent, PLATO_SELECCIONADO);
+        }
     }
 
     @Override
@@ -129,6 +139,7 @@ public class SeleccionaPlatoActivity extends AppCompatActivity implements  Selec
 
             Mesa mesa = Mesas.getInstance().getMesa(mMesaIndex);
             mesa.addPlato(plato);
+            //saco un mensajito de que se ha incluido el plato
         }
 
         /*

@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
 import com.nicatec.restaurante.R;
 import com.nicatec.restaurante.model.Carta;
@@ -32,6 +33,14 @@ public class PlatoDetalleFragment extends Fragment {
     //esta opcion de la mesa es para cuando se edita un plato de la mesa
     private static Mesa mMesa = null;
     private PlatoDetalleListener mPlatoDetalleListener;
+    //me guardo los enlaces a los objetos de la pantalla
+    private ImageView mPhoto = null;
+    private TextView mNombre = null;
+    private TextView mPrecio = null;
+    private TextView mComentario = null;
+    private EditText mCamarero = null;
+    private LinearLayout mLinearLayout = null;
+    private View mRoot = null;
 
     public static PlatoDetalleFragment newInstance(int positionPlato, int positionMesa){
         Bundle arguments = new Bundle();
@@ -68,15 +77,16 @@ public class PlatoDetalleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root =  inflater.inflate(R.layout.fragment_plato_detalle, container, false);
+        mRoot =  inflater.inflate(R.layout.fragment_plato_detalle, container, false);
 
-        ImageView photo = (ImageView) root.findViewById(R.id.imageView);
-        TextView nombre = (TextView) root.findViewById(R.id.nombre);
-        TextView precio = (TextView) root.findViewById(R.id.precio);
-        TextView comentario = (TextView) root.findViewById(R.id.comentario);
-        final EditText camarero = ( EditText) root.findViewById(R.id.camarero);
+        mPhoto = (ImageView) mRoot.findViewById(R.id.imageView);
+        mNombre = (TextView) mRoot.findViewById(R.id.nombre);
+        mPrecio = (TextView) mRoot.findViewById(R.id.precio);
+        mComentario = (TextView) mRoot.findViewById(R.id.comentario);
+        mCamarero = ( EditText) mRoot.findViewById(R.id.camarero);
+        mLinearLayout = (LinearLayout) mRoot.findViewById(R.id.alergiasIcons);
 
-        Button add_plato = (Button) root.findViewById(R.id.add_button);
+        Button add_plato = (Button) mRoot.findViewById(R.id.add_button);
         //si se esta editando cambio el texto del boton
         if ( mMesa != null ){
             add_plato.setText("Modificar");
@@ -86,7 +96,7 @@ public class PlatoDetalleFragment extends Fragment {
             public void onClick(View v) {
                 //hay que añadir el plato. La actividad tiene la mesa y aqui le paso el plato y el comentario del camarero, si lo hubiera puesto
                 if (mPlatoDetalleListener != null) {
-                    String c = camarero.getText().toString();
+                    String c = mCamarero.getText().toString();
 
                     //en el caso de que la mesa sea null, significa que añado un plato a la mesa
                     if ( mMesa == null) {
@@ -105,6 +115,8 @@ public class PlatoDetalleFragment extends Fragment {
             }
         });
 
+        muestraDetalleDelPlato();
+        /*
         nombre.setText(mPlato.getNombre());
         precio.setText(mPlato.getPrecioString());
         photo.setImageBitmap(mPlato.getPic());
@@ -135,14 +147,10 @@ public class PlatoDetalleFragment extends Fragment {
 
                 linearLayout.addView(imageView);
             }
-
-
-
-
-
         }
+        */
 
-        return root;
+        return mRoot;
     }
 
     void updateTitle(String newTitle){
@@ -154,6 +162,51 @@ public class PlatoDetalleFragment extends Fragment {
 
             // 3) Cambiar el texto a la toolbar
             actionBar.setTitle(newTitle);
+        }
+
+    }
+    public void muestraPlatoDeLaMesa(int platoIndex, int mesaIndex){
+        //me pasan un plato y puede que una mesa, si viene con mesa saco el plato de ahi, si es -1 lo saco de la carta
+        if ( mesaIndex == -1) {
+            mPlato = Carta.getsInstance().getPlato(platoIndex);
+        } else {
+            mMesa = Mesas.getInstance().getMesa(mesaIndex);
+            mPlato = mMesa.getPlatos().get(platoIndex);
+        }
+        muestraDetalleDelPlato();
+    }
+
+    private void muestraDetalleDelPlato(){
+        //pinta los datos del plato
+        mNombre.setText(mPlato.getNombre());
+        mPrecio.setText(mPlato.getPrecioString());
+        mPhoto.setImageBitmap(mPlato.getPic());
+        mComentario.setText(mPlato.getComentario());
+        if ( mPlato.getCamarero() != null) {
+            mCamarero.setText(mPlato.getCamarero());
+        }
+
+        //hago un linear layout para poner los icono de las alergias
+        //conpruebo si tengo alergias
+        if ( mPlato.alergiasCount() > 0) {
+
+            for (int i = 0; i < mPlato.alergiasCount(); i++) {
+                //saco la alergia que es
+                String a = mPlato.getAlergiaAtIndex(i);
+                //creo las vistas e inserto en el layout
+                ImageView imageView = new ImageView(mRoot.getContext());
+                //imagino que esto se podra generar automaticamente o hacer de una menera mejor, pero de momento con el switch
+                switch (a){
+                    case "gluten":
+                        imageView.setImageResource(R.drawable.gluten);
+                        break;
+                    case "huevo":
+                        imageView.setImageResource(R.drawable.huevo);
+                        break;
+                }
+
+                mLinearLayout.addView(imageView);
+            }
         }
 
     }
